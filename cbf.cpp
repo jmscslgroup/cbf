@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.80
+// Model version                  : 3.81
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Dec 10 16:09:21 2021
+// C/C++ source code generated on : Fri Dec 10 16:21:28 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -144,18 +144,20 @@ void cbf_step(void)
 
   // Switch: '<Root>/Switch' incorporates:
   //   Constant: '<Root>/Constant2'
-  //   MinMax: '<Root>/MinMax'
   //   SignalConversion generated from: '<Root>/Bus Selector7'
 
   if (cbf_P.Constant2_Value > cbf_P.Switch_Threshold) {
-    rtb_minmax1530 = cbf_B.In1_o.Data;
-  } else if ((rtb_cmd_accel < cbf_B.In1_o.Data) || rtIsNaN(cbf_B.In1_o.Data)) {
-    // MinMax: '<Root>/MinMax'
-    rtb_minmax1530 = rtb_cmd_accel;
-  } else {
     // MinMax: '<Root>/MinMax' incorporates:
     //   SignalConversion generated from: '<Root>/Bus Selector7'
 
+    if ((rtb_cmd_accel < cbf_B.In1_o.Data) || rtIsNaN(cbf_B.In1_o.Data)) {
+      rtb_minmax1530 = rtb_cmd_accel;
+    } else {
+      rtb_minmax1530 = cbf_B.In1_o.Data;
+    }
+
+    // End of MinMax: '<Root>/MinMax'
+  } else {
     rtb_minmax1530 = cbf_B.In1_o.Data;
   }
 
