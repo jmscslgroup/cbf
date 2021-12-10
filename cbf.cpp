@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.77
+// Model version                  : 3.80
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Dec 10 14:49:17 2021
+// C/C++ source code generated on : Fri Dec 10 16:09:21 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -58,23 +58,6 @@ void cbf_step(void)
   // End of MATLABSystem: '<S9>/SourceBlock'
   // End of Outputs for SubSystem: '<S9>/Enabled Subsystem'
   // End of Outputs for SubSystem: '<Root>/Subscribe6'
-
-  // Outputs for Atomic SubSystem: '<Root>/Subscribe7'
-  // MATLABSystem: '<S10>/SourceBlock' incorporates:
-  //   Inport: '<S16>/In1'
-
-  b_varargout_1 = Sub_cbf_481.getLatestMessage(&b_varargout_2_0);
-
-  // Outputs for Enabled SubSystem: '<S10>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S16>/Enable'
-
-  if (b_varargout_1) {
-    cbf_B.In1_c = b_varargout_2_0;
-  }
-
-  // End of MATLABSystem: '<S10>/SourceBlock'
-  // End of Outputs for SubSystem: '<S10>/Enabled Subsystem'
-  // End of Outputs for SubSystem: '<Root>/Subscribe7'
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe'
   // MATLABSystem: '<S6>/SourceBlock' incorporates:
@@ -160,15 +143,19 @@ void cbf_step(void)
   }
 
   // Switch: '<Root>/Switch' incorporates:
+  //   Constant: '<Root>/Constant2'
   //   MinMax: '<Root>/MinMax'
+  //   SignalConversion generated from: '<Root>/Bus Selector7'
 
-  if (cbf_B.In1_c.Data) {
+  if (cbf_P.Constant2_Value > cbf_P.Switch_Threshold) {
     rtb_minmax1530 = cbf_B.In1_o.Data;
   } else if ((rtb_cmd_accel < cbf_B.In1_o.Data) || rtIsNaN(cbf_B.In1_o.Data)) {
     // MinMax: '<Root>/MinMax'
     rtb_minmax1530 = rtb_cmd_accel;
   } else {
-    // MinMax: '<Root>/MinMax'
+    // MinMax: '<Root>/MinMax' incorporates:
+    //   SignalConversion generated from: '<Root>/Bus Selector7'
+
     rtb_minmax1530 = cbf_B.In1_o.Data;
   }
 
@@ -195,6 +182,7 @@ void cbf_step(void)
   // BusAssignment: '<Root>/Bus Assignment2' incorporates:
   //   Constant: '<S2>/Constant'
   //   MATLAB Function: '<S11>/MATLAB Function1'
+  //   SignalConversion generated from: '<Root>/Bus Selector7'
 
   cbf_B.BusAssignment2 = cbf_P.Constant_Value;
   cbf_B.BusAssignment2.Linear.X = cbf_B.In1_o.Data;
@@ -214,6 +202,12 @@ void cbf_step(void)
 
   // MATLABSystem: '<S11>/Get Parameter6'
   ParamGet_cbf_465.get_parameter(&value);
+
+  // Outputs for Atomic SubSystem: '<Root>/Subscribe7'
+  // MATLABSystem: '<S10>/SourceBlock'
+  Sub_cbf_481.getLatestMessage(&b_varargout_2_0);
+
+  // End of Outputs for SubSystem: '<Root>/Subscribe7'
 }
 
 // Model initialize function
@@ -236,20 +230,20 @@ void cbf_initialize(void)
     static const char_T tmp[13] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l',
       '_', 'p', 'r', 'e' };
 
-    static const char_T tmp_0[24] = { '/', 'c', 'a', 'r', '/', 'h', 'u', 'd',
+    static const char_T tmp_0[9] = { 'l', 'e', 'a', 'd', '_', 'd', 'i', 's', 't'
+    };
+
+    static const char_T tmp_1[7] = { 'r', 'e', 'l', '_', 'v', 'e', 'l' };
+
+    static const char_T tmp_2[9] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l'
+    };
+
+    static const char_T tmp_3[14] = { '/', 'c', 'b', 'f', '/', 'c', 'b', 'f',
+      '_', 'd', 'e', 'b', 'u', 'g' };
+
+    static const char_T tmp_4[24] = { '/', 'c', 'a', 'r', '/', 'h', 'u', 'd',
       '/', 'm', 'i', 'n', 'i', '_', 'c', 'a', 'r', '_', 'e', 'n', 'a', 'b', 'l',
       'e' };
-
-    static const char_T tmp_1[9] = { 'l', 'e', 'a', 'd', '_', 'd', 'i', 's', 't'
-    };
-
-    static const char_T tmp_2[7] = { 'r', 'e', 'l', '_', 'v', 'e', 'l' };
-
-    static const char_T tmp_3[9] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l'
-    };
-
-    static const char_T tmp_4[14] = { '/', 'c', 'b', 'f', '/', 'c', 'b', 'f',
-      '_', 'd', 'e', 'b', 'u', 'g' };
 
     static const char_T tmp_5[7] = { 't', 'i', 'm', 'e', 'g', 'a', 'p' };
 
@@ -281,29 +275,6 @@ void cbf_initialize(void)
     // End of Start for MATLABSystem: '<S9>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe6'
 
-    // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe7'
-    // SystemInitialize for Enabled SubSystem: '<S10>/Enabled Subsystem'
-    // SystemInitialize for Outport: '<S16>/Out1' incorporates:
-    //   Inport: '<S16>/In1'
-
-    cbf_B.In1_c = cbf_P.Out1_Y0_o;
-
-    // End of SystemInitialize for SubSystem: '<S10>/Enabled Subsystem'
-
-    // Start for MATLABSystem: '<S10>/SourceBlock'
-    cbf_DW.obj_d.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_d.isInitialized = 1;
-    for (i = 0; i < 24; i++) {
-      cbf_B.b_zeroDelimTopic[i] = tmp_0[i];
-    }
-
-    cbf_B.b_zeroDelimTopic[24] = '\x00';
-    Sub_cbf_481.createSubscriber(&cbf_B.b_zeroDelimTopic[0], 1);
-    cbf_DW.obj_d.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S10>/SourceBlock'
-    // End of SystemInitialize for SubSystem: '<Root>/Subscribe7'
-
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe'
     // SystemInitialize for Enabled SubSystem: '<S6>/Enabled Subsystem'
     // SystemInitialize for Outport: '<S12>/Out1' incorporates:
@@ -317,7 +288,7 @@ void cbf_initialize(void)
     cbf_DW.obj_f.matlabCodegenIsDeleted = false;
     cbf_DW.obj_f.isInitialized = 1;
     for (i = 0; i < 9; i++) {
-      b_zeroDelimTopic_0[i] = tmp_1[i];
+      b_zeroDelimTopic_0[i] = tmp_0[i];
     }
 
     b_zeroDelimTopic_0[9] = '\x00';
@@ -340,7 +311,7 @@ void cbf_initialize(void)
     cbf_DW.obj_o.matlabCodegenIsDeleted = false;
     cbf_DW.obj_o.isInitialized = 1;
     for (i = 0; i < 7; i++) {
-      b_zeroDelimTopic_1[i] = tmp_2[i];
+      b_zeroDelimTopic_1[i] = tmp_1[i];
     }
 
     b_zeroDelimTopic_1[7] = '\x00';
@@ -376,7 +347,7 @@ void cbf_initialize(void)
     cbf_DW.obj_c.matlabCodegenIsDeleted = false;
     cbf_DW.obj_c.isInitialized = 1;
     for (i = 0; i < 9; i++) {
-      b_zeroDelimTopic_0[i] = tmp_3[i];
+      b_zeroDelimTopic_0[i] = tmp_2[i];
     }
 
     b_zeroDelimTopic_0[9] = '\x00';
@@ -391,7 +362,7 @@ void cbf_initialize(void)
     cbf_DW.obj_j.matlabCodegenIsDeleted = false;
     cbf_DW.obj_j.isInitialized = 1;
     for (i = 0; i < 14; i++) {
-      b_zeroDelimTopic_3[i] = tmp_4[i];
+      b_zeroDelimTopic_3[i] = tmp_3[i];
     }
 
     b_zeroDelimTopic_3[14] = '\x00';
@@ -400,6 +371,21 @@ void cbf_initialize(void)
 
     // End of Start for MATLABSystem: '<S5>/SinkBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Publish2'
+
+    // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe7'
+    // Start for MATLABSystem: '<S10>/SourceBlock'
+    cbf_DW.obj_d.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_d.isInitialized = 1;
+    for (i = 0; i < 24; i++) {
+      cbf_B.b_zeroDelimTopic[i] = tmp_4[i];
+    }
+
+    cbf_B.b_zeroDelimTopic[24] = '\x00';
+    Sub_cbf_481.createSubscriber(&cbf_B.b_zeroDelimTopic[0], 1);
+    cbf_DW.obj_d.isSetupComplete = true;
+
+    // End of Start for MATLABSystem: '<S10>/SourceBlock'
+    // End of SystemInitialize for SubSystem: '<Root>/Subscribe7'
 
     // Start for MATLABSystem: '<S11>/Get Parameter2'
     cbf_DW.obj_p.matlabCodegenIsDeleted = false;
@@ -493,15 +479,6 @@ void cbf_terminate(void)
   // End of Terminate for MATLABSystem: '<S9>/SourceBlock'
   // End of Terminate for SubSystem: '<Root>/Subscribe6'
 
-  // Terminate for Atomic SubSystem: '<Root>/Subscribe7'
-  // Terminate for MATLABSystem: '<S10>/SourceBlock'
-  if (!cbf_DW.obj_d.matlabCodegenIsDeleted) {
-    cbf_DW.obj_d.matlabCodegenIsDeleted = true;
-  }
-
-  // End of Terminate for MATLABSystem: '<S10>/SourceBlock'
-  // End of Terminate for SubSystem: '<Root>/Subscribe7'
-
   // Terminate for Atomic SubSystem: '<Root>/Subscribe'
   // Terminate for MATLABSystem: '<S6>/SourceBlock'
   if (!cbf_DW.obj_f.matlabCodegenIsDeleted) {
@@ -588,6 +565,15 @@ void cbf_terminate(void)
   }
 
   // End of Terminate for MATLABSystem: '<S11>/Get Parameter6'
+
+  // Terminate for Atomic SubSystem: '<Root>/Subscribe7'
+  // Terminate for MATLABSystem: '<S10>/SourceBlock'
+  if (!cbf_DW.obj_d.matlabCodegenIsDeleted) {
+    cbf_DW.obj_d.matlabCodegenIsDeleted = true;
+  }
+
+  // End of Terminate for MATLABSystem: '<S10>/SourceBlock'
+  // End of Terminate for SubSystem: '<Root>/Subscribe7'
 }
 
 //

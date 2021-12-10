@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.77
+// Model version                  : 3.80
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Dec 10 14:49:17 2021
+// C/C++ source code generated on : Fri Dec 10 16:09:21 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -44,7 +44,6 @@ struct B_cbf_T {
   char_T b_zeroDelimTopic[25];
   SL_Bus_cbf_std_msgs_Float64 In1_o;   // '<S15>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_m;   // '<S12>/In1'
-  SL_Bus_cbf_std_msgs_Bool In1_c;      // '<S16>/In1'
 };
 
 // Block states (default storage) for system '<Root>'
@@ -102,6 +101,12 @@ struct P_cbf_T_ {
 
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_a;// Computed Parameter: Constant_Value_a
                                                   //  Referenced by: '<S9>/Constant'
+
+  real_T Constant2_Value;              // Expression: 1.0
+                                          //  Referenced by: '<Root>/Constant2'
+
+  real_T Switch_Threshold;             // Expression: 0.5
+                                          //  Referenced by: '<Root>/Switch'
 
   real_T minmax1530_UpperSat;          // Expression: 3.0
                                           //  Referenced by: '<Root>/min//max -1.5//3.0'
@@ -179,6 +184,12 @@ extern "C" {
 
 }
 #endif
+
+//-
+//  These blocks were eliminated from the model due to optimizations:
+//
+//  Block '<Root>/Scope' : Unused code path elimination
+
 
 //-
 //  The generated code includes comments that allow you to trace directly
