@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.72
+// Model version                  : 3.77
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Dec 10 12:11:26 2021
+// C/C++ source code generated on : Fri Dec 10 14:49:17 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -103,8 +103,11 @@ struct P_cbf_T_ {
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_a;// Computed Parameter: Constant_Value_a
                                                   //  Referenced by: '<S9>/Constant'
 
-  real_T Switch_Threshold;             // Expression: 0
-                                          //  Referenced by: '<Root>/Switch'
+  real_T minmax1530_UpperSat;          // Expression: 3.0
+                                          //  Referenced by: '<Root>/min//max -1.5//3.0'
+
+  real_T minmax1530_LowerSat;          // Expression: -1.5
+                                          //  Referenced by: '<Root>/min//max -1.5//3.0'
 
   real_T Constant1_Value;              // Expression: 5
                                           //  Referenced by: '<Root>/Constant1'

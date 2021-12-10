@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.72
+// Model version                  : 3.77
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Dec 10 12:11:26 2021
+// C/C++ source code generated on : Fri Dec 10 14:49:17 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -35,11 +35,11 @@ void cbf_step(void)
   SL_Bus_cbf_std_msgs_Bool b_varargout_2_0;
   SL_Bus_cbf_std_msgs_Float64 b_varargout_2;
   SL_Bus_cbf_std_msgs_Float64 rtb_BusAssignment1;
-  real_T rtb_Switch;
+  real_T rtb_cmd_accel;
+  real_T rtb_minmax1530;
   real_T value;
   real_T value_0;
   real_T value_1;
-  real_T value_2;
   boolean_T b_varargout_1;
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe6'
@@ -137,10 +137,10 @@ void cbf_step(void)
   ParamGet_cbf_449.get_parameter(&value_1);
 
   // MATLABSystem: '<S11>/Get Parameter4'
-  ParamGet_cbf_450.get_parameter(&rtb_Switch);
+  ParamGet_cbf_450.get_parameter(&rtb_cmd_accel);
 
   // MATLABSystem: '<S11>/Get Parameter5'
-  ParamGet_cbf_463.get_parameter(&value_2);
+  ParamGet_cbf_463.get_parameter(&rtb_minmax1530);
 
   // MATLAB Function: '<S11>/MATLAB Function1' incorporates:
   //   MATLABSystem: '<S11>/Get Parameter1'
@@ -151,45 +151,40 @@ void cbf_step(void)
 
   value = (cbf_B.In1_m.Data - value * cbf_B.In1.Linear.X) * (value_0 / value) +
     1.0 / value * cbf_B.In1_p.Linear.Z;
-  value_1 = (rtb_Switch + value_2) * cbf_B.In1_p.Linear.Z + rtb_Switch * value_2
-    * (cbf_B.In1_m.Data - value_1);
+  value_1 = (rtb_cmd_accel + rtb_minmax1530) * cbf_B.In1_p.Linear.Z +
+    rtb_cmd_accel * rtb_minmax1530 * (cbf_B.In1_m.Data - value_1);
+  if ((value < value_1) || rtIsNaN(value_1)) {
+    rtb_cmd_accel = value;
+  } else {
+    rtb_cmd_accel = value_1;
+  }
 
   // Switch: '<Root>/Switch' incorporates:
-  //   DataTypeConversion: '<Root>/Cast To Double'
-  //   MATLAB Function: '<S11>/MATLAB Function1'
+  //   MinMax: '<Root>/MinMax'
 
-  if (static_cast<real_T>(cbf_B.In1_c.Data) > cbf_P.Switch_Threshold) {
-    rtb_Switch = cbf_B.In1_o.Data;
-  } else {
-    if ((value < value_1) || rtIsNaN(value_1)) {
-      // MATLAB Function: '<S11>/MATLAB Function1'
-      rtb_Switch = value;
-    } else {
-      // MATLAB Function: '<S11>/MATLAB Function1'
-      rtb_Switch = value_1;
-    }
-
-    // MATLAB Function: '<S11>/MATLAB Function1'
-    if ((-3.0 > rtb_Switch) || rtIsNaN(rtb_Switch)) {
-      rtb_Switch = -3.0;
-    }
-
-    if ((1.5 < rtb_Switch) || rtIsNaN(rtb_Switch)) {
-      rtb_Switch = 1.5;
-    }
-
+  if (cbf_B.In1_c.Data) {
+    rtb_minmax1530 = cbf_B.In1_o.Data;
+  } else if ((rtb_cmd_accel < cbf_B.In1_o.Data) || rtIsNaN(cbf_B.In1_o.Data)) {
     // MinMax: '<Root>/MinMax'
-    if ((!(rtb_Switch < cbf_B.In1_o.Data)) && (!rtIsNaN(cbf_B.In1_o.Data))) {
-      rtb_Switch = cbf_B.In1_o.Data;
-    }
-
-    // End of MinMax: '<Root>/MinMax'
+    rtb_minmax1530 = rtb_cmd_accel;
+  } else {
+    // MinMax: '<Root>/MinMax'
+    rtb_minmax1530 = cbf_B.In1_o.Data;
   }
 
   // End of Switch: '<Root>/Switch'
 
+  // Saturate: '<Root>/min//max -1.5//3.0'
+  if (rtb_minmax1530 > cbf_P.minmax1530_UpperSat) {
+    rtb_minmax1530 = cbf_P.minmax1530_UpperSat;
+  } else if (rtb_minmax1530 < cbf_P.minmax1530_LowerSat) {
+    rtb_minmax1530 = cbf_P.minmax1530_LowerSat;
+  }
+
+  // End of Saturate: '<Root>/min//max -1.5//3.0'
+
   // BusAssignment: '<Root>/Bus Assignment1'
-  rtb_BusAssignment1.Data = rtb_Switch;
+  rtb_BusAssignment1.Data = rtb_minmax1530;
 
   // Outputs for Atomic SubSystem: '<Root>/Publish1'
   // MATLABSystem: '<S4>/SinkBlock'
@@ -202,8 +197,9 @@ void cbf_step(void)
   //   MATLAB Function: '<S11>/MATLAB Function1'
 
   cbf_B.BusAssignment2 = cbf_P.Constant_Value;
-  cbf_B.BusAssignment2.Linear.X = rtb_Switch;
-  cbf_B.BusAssignment2.Linear.Y = cbf_B.In1_o.Data;
+  cbf_B.BusAssignment2.Linear.X = cbf_B.In1_o.Data;
+  cbf_B.BusAssignment2.Linear.Y = rtb_cmd_accel;
+  cbf_B.BusAssignment2.Linear.Z = rtb_minmax1530;
   cbf_B.BusAssignment2.Angular.Y = value;
   cbf_B.BusAssignment2.Angular.Z = value_1;
 

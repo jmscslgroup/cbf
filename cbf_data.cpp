@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.72
+// Model version                  : 3.77
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Dec 10 12:11:26 2021
+// C/C++ source code generated on : Fri Dec 10 14:49:17 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -155,10 +155,15 @@ P_cbf_T cbf_P = {
     0.0                                // Data
   },
 
-  // Expression: 0
-  //  Referenced by: '<Root>/Switch'
+  // Expression: 3.0
+  //  Referenced by: '<Root>/min//max -1.5//3.0'
 
-  0.0,
+  3.0,
+
+  // Expression: -1.5
+  //  Referenced by: '<Root>/min//max -1.5//3.0'
+
+  -1.5,
 
   // Expression: 5
   //  Referenced by: '<Root>/Constant1'
