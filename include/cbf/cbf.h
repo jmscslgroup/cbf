@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.83
-// Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Feb 25 16:55:56 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+// C/C++ source code generated on : Mon Jun 20 11:51:44 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -18,14 +18,25 @@
 //
 #ifndef RTW_HEADER_cbf_h_
 #define RTW_HEADER_cbf_h_
-#include <stddef.h>
 #include "rtwtypes.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "slros_initialize.h"
 #include "cbf_types.h"
-#include "rt_nonfinite.h"
+
+extern "C" {
+
 #include "rtGetInf.h"
+
+}
+  extern "C"
+{
+
+#include "rt_nonfinite.h"
+
+}
+
+#include <stddef.h>
 
 // Macros for accessing real-time model data structure
 #ifndef rtmGetErrorStatus
@@ -108,10 +119,10 @@ struct P_cbf_T_ {
   real_T Switch_Threshold;             // Expression: 0.5
                                           //  Referenced by: '<Root>/Switch'
 
-  real_T minmax1530_UpperSat;          // Expression: 1.5
+  real_T minmax1530_UpperSat;          // Expression: 3.0
                                           //  Referenced by: '<Root>/min//max -1.5//3.0'
 
-  real_T minmax1530_LowerSat;          // Expression: -3.0
+  real_T minmax1530_LowerSat;          // Expression: -1.5
                                           //  Referenced by: '<Root>/min//max -1.5//3.0'
 
   real_T Constant1_Value;              // Expression: 5
@@ -121,7 +132,7 @@ struct P_cbf_T_ {
 
 // Real-time Model Data Structure
 struct tag_RTM_cbf_T {
-  const char_T *errorStatus;
+  const char_T * volatile errorStatus;
 };
 
 // Block parameters (default storage)
