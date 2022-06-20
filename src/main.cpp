@@ -1,5 +1,12 @@
-// Copyright 2019-2020 The MathWorks, Inc.
-// Generated 25-Feb-2022 16:56:02
+//
+// File main.cpp
+//
+// Code generated for Simulink model 'cbf'.
+//
+// Model version                  : 3.81
+// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+// C/C++ source code generated on : Mon Jun 20 11:52:43 2022
+//
 
 #include <stdio.h>
 #include "rosnodeinterface.h"

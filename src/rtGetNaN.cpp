@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.83
-// Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Feb 25 16:55:56 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+// C/C++ source code generated on : Mon Jun 20 11:51:44 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -17,10 +17,20 @@
 // Validation result: Not run
 //
 
-//
-//  Abstract:
-//       Function to initialize non-finite, NaN
+#include "rtwtypes.h"
+
+extern "C" {
+
 #include "rtGetNaN.h"
+
+}
+#include <stddef.h>
+
+extern "C" {
+
+#include "rt_nonfinite.h"
+
+}
 #define NumBitsPerChar                 8U
 
 extern "C" {

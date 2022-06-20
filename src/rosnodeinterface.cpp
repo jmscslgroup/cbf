@@ -1,5 +1,12 @@
-// Copyright 2019-2021 The MathWorks, Inc.
-// Generated 25-Feb-2022 16:56:02
+//
+// File rosnodeinterface.cpp
+//
+// Code generated for Simulink model 'cbf'.
+//
+// Model version                  : 3.81
+// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+// C/C++ source code generated on : Mon Jun 20 11:52:43 2022
+//
 
 #ifdef _MSC_VER
 
@@ -118,8 +125,7 @@ namespace ros
     void NodeInterface::schedulerThread(void)
     {
       while (mRunModel) {
-        std::this_thread::sleep_until(std::chrono::system_clock::now() + std::
-          chrono::nanoseconds(50000000));
+        std::this_thread::sleep_for(std::chrono::nanoseconds(50000000));
         mBaseRateSem.notify();
       }
     }

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.83
-// Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri Feb 25 16:55:56 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+// C/C++ source code generated on : Mon Jun 20 11:51:44 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -18,9 +18,7 @@
 //
 #ifndef RTW_HEADER_rtGetNaN_h_
 #define RTW_HEADER_rtGetNaN_h_
-#include <stddef.h>
 #include "rtwtypes.h"
-#include "rt_nonfinite.h"
 #ifdef __cplusplus
 
 extern "C" {
