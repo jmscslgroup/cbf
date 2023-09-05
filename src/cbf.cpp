@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 3.81
+// Model version                  : 7.0
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Sep  5 12:07:59 2023
+// C/C++ source code generated on : Tue Sep  5 15:13:21 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -434,7 +434,7 @@ void cbf_initialize(void)
     b_zeroDelimName[5] = '\x00';
     ParamGet_cbf_449.initialize(&b_zeroDelimName[0]);
     ParamGet_cbf_449.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_449.set_initial_value(15.0);
+    ParamGet_cbf_449.set_initial_value(10.0);
     cbf_DW.obj_i.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S11>/Get Parameter3'
