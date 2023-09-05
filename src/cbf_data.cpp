@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:01 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+// C/C++ source code generated on : Tue Sep  5 12:07:59 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -38,7 +38,7 @@ P_cbf_T cbf_P = {
   },
 
   // Computed Parameter: Out1_Y0
-  //  Referenced by: '<S14>/Out1'
+  //  Referenced by: '<S13>/Out1'
 
   {
     {
@@ -54,7 +54,7 @@ P_cbf_T cbf_P = {
     }                                  // Angular
   },
 
-  // Computed Parameter: Constant_Value_n
+  // Computed Parameter: Constant_Value_p
   //  Referenced by: '<S7>/Constant'
 
   {
@@ -71,8 +71,8 @@ P_cbf_T cbf_P = {
     }                                  // Angular
   },
 
-  // Computed Parameter: Out1_Y0_m
-  //  Referenced by: '<S15>/Out1'
+  // Computed Parameter: Out1_Y0_k
+  //  Referenced by: '<S14>/Out1'
 
   {
     {
@@ -88,7 +88,7 @@ P_cbf_T cbf_P = {
     }                                  // Angular
   },
 
-  // Computed Parameter: Constant_Value_j
+  // Computed Parameter: Constant_Value_pq
   //  Referenced by: '<S8>/Constant'
 
   {
@@ -105,64 +105,50 @@ P_cbf_T cbf_P = {
     }                                  // Angular
   },
 
-  // Computed Parameter: Out1_Y0_g
-  //  Referenced by: '<S17>/Out1'
+  // Computed Parameter: Out1_Y0_o
+  //  Referenced by: '<S16>/Out1'
 
   {
     false                              // Data
   },
 
-  // Computed Parameter: Constant_Value_nx
+  // Computed Parameter: Constant_Value_o
   //  Referenced by: '<S10>/Constant'
 
   {
     false                              // Data
   },
 
-  // Computed Parameter: Constant_Value_l
+  // Computed Parameter: Constant_Value_m
   //  Referenced by: '<S1>/Constant'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Out1_Y0_k
-  //  Referenced by: '<S13>/Out1'
+  // Computed Parameter: Out1_Y0_f
+  //  Referenced by: '<S12>/Out1'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Constant_Value_h
+  // Computed Parameter: Constant_Value_k
   //  Referenced by: '<S6>/Constant'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Out1_Y0_e
-  //  Referenced by: '<S16>/Out1'
+  // Computed Parameter: Out1_Y0_a
+  //  Referenced by: '<S15>/Out1'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Constant_Value_f
+  // Computed Parameter: Constant_Value_a
   //  Referenced by: '<S9>/Constant'
-
-  {
-    0.0                                // Data
-  },
-
-  // Computed Parameter: Out1_Y0_p
-  //  Referenced by: '<S18>/Out1'
-
-  {
-    0.0                                // Data
-  },
-
-  // Computed Parameter: Constant_Value_hk
-  //  Referenced by: '<S11>/Constant'
 
   {
     0.0                                // Data
@@ -178,15 +164,15 @@ P_cbf_T cbf_P = {
 
   0.5,
 
-  // Expression: 1.5
-  //  Referenced by: '<Root>/min//max -3.0//1.5'
+  // Expression: 3.0
+  //  Referenced by: '<Root>/min//max -1.5//3.0'
 
-  1.5,
+  3.0,
 
-  // Expression: -3.0
-  //  Referenced by: '<Root>/min//max -3.0//1.5'
+  // Expression: -1.5
+  //  Referenced by: '<Root>/min//max -1.5//3.0'
 
-  -3.0,
+  -1.5,
 
   // Expression: 5
   //  Referenced by: '<Root>/Constant1'

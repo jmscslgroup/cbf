@@ -33,6 +33,7 @@ catkin_package(
   geometry_msgs
   roscpp
   std_msgs
+  INCLUDE_DIRS include
 )
 ###########
 ## Build ##
@@ -92,7 +93,7 @@ target_compile_options(cbf PUBLIC
   -DSTACK_SIZE=64
   -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__
   -DRT=RT
-     -fpermissive  >
+    -fpermissive  >
   )
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -118,7 +119,13 @@ add_custom_command(
                    TARGET cbf
                    POST_BUILD
                    COMMAND ${CMAKE_COMMAND}
+                   ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/codegen/exe/cbf/${file_i}
+				   )
+add_custom_command(
+                   TARGET cbf
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND}
                    ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/cbf_ert_rtw/${file_i}
 				   )
 endforeach(file_i)
-# Generated on Mon Jun 20 15:39:08 2022
+# Generated on Tue Sep 05 12:08:13 2023

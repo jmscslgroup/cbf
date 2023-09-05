@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:01 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+// C/C++ source code generated on : Tue Sep  5 12:07:59 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -19,8 +19,6 @@
 #ifndef RTW_HEADER_cbf_types_h_
 #define RTW_HEADER_cbf_types_h_
 #include "rtwtypes.h"
-
-// Model Code Variants
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_cbf_std_msgs_Float64_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_cbf_std_msgs_Float64_
 
@@ -71,29 +69,6 @@ struct SL_Bus_cbf_std_msgs_Bool
 
 #endif
 
-#ifndef struct_f_robotics_slcore_internal_bl_T
-#define struct_f_robotics_slcore_internal_bl_T
-
-struct f_robotics_slcore_internal_bl_T
-{
-  int32_T __dummy;
-};
-
-#endif                                // struct_f_robotics_slcore_internal_bl_T
-
-#ifndef struct_ros_slros_internal_block_GetP_T
-#define struct_ros_slros_internal_block_GetP_T
-
-struct ros_slros_internal_block_GetP_T
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  f_robotics_slcore_internal_bl_T SampleTimeHandler;
-};
-
-#endif                                // struct_ros_slros_internal_block_GetP_T
-
 #ifndef struct_ros_slroscpp_internal_block_P_T
 #define struct_ros_slroscpp_internal_block_P_T
 
@@ -117,6 +92,29 @@ struct ros_slroscpp_internal_block_S_T
 };
 
 #endif                                // struct_ros_slroscpp_internal_block_S_T
+
+#ifndef struct_f_robotics_slcore_internal_bl_T
+#define struct_f_robotics_slcore_internal_bl_T
+
+struct f_robotics_slcore_internal_bl_T
+{
+  int32_T __dummy;
+};
+
+#endif                                // struct_f_robotics_slcore_internal_bl_T
+
+#ifndef struct_ros_slros_internal_block_GetP_T
+#define struct_ros_slros_internal_block_GetP_T
+
+struct ros_slros_internal_block_GetP_T
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  f_robotics_slcore_internal_bl_T SampleTimeHandler;
+};
+
+#endif                                // struct_ros_slros_internal_block_GetP_T
 
 // Parameters (default storage)
 typedef struct P_cbf_T_ P_cbf_T;

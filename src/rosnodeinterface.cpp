@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:06 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+// C/C++ source code generated on : Tue Sep 05 12:08:09 2023
 //
 
 #ifdef _MSC_VER
@@ -44,7 +44,7 @@ namespace ros
       : mNode()
       , mBaseRateSem()
       , mBaseRateThread()
-      , mSchedulerThread()
+      , mSchedulerTimer()
       , mStopSem()
       , mRunModel(true)
     {
@@ -69,9 +69,11 @@ namespace ros
         mBaseRateThread = std::make_shared<std::thread>(&NodeInterface::
           baseRateTask, this);
 
-        // create scheduler thread
-        mSchedulerThread = std::make_shared<std::thread>(&NodeInterface::
-          schedulerThread, this);
+        // create scheduler timer to run the scheduler callback
+        mSchedulerTimer = std::make_shared<ros::WallTimer>
+          (mNode->createWallTimer(ros::WallDuration(50000000*1e-9),
+            boost::bind(&NodeInterface::schedulerCallback, this, _1)));
+        mSchedulerTimer->start();
       } catch (std::exception& ex) {
         std::cout << ex.what() << std::endl;
         throw ex;
@@ -109,9 +111,9 @@ namespace ros
         mBaseRateThread->join();
         mRunModel = false;
         mBaseRateThread.reset();
-        if (mSchedulerThread.get()) {
-          mSchedulerThread->join();
-          mSchedulerThread.reset();
+        if (mSchedulerTimer.get()) {
+          mSchedulerTimer->stop();
+          mSchedulerTimer.reset();
         }
 
         cbf_terminate();
@@ -122,10 +124,9 @@ namespace ros
     //
     // Scheduler Task using ROS Wall clock timer to run base-rate
     //
-    void NodeInterface::schedulerThread(void)
+    void NodeInterface::schedulerCallback(const ros::WallTimerEvent& ev)
     {
-      while (mRunModel) {
-        std::this_thread::sleep_for(std::chrono::nanoseconds(50000000));
+      if (mRunModel) {
         mBaseRateSem.notify();
       }
     }

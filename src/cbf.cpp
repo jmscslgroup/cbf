@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:01 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+// C/C++ source code generated on : Tue Sep  5 12:07:59 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -18,11 +18,13 @@
 //
 #include "cbf.h"
 
-extern "C" {
+extern "C"
+{
 
 #include "rt_nonfinite.h"
 
 }
+
 #include "rtwtypes.h"
 #include "cbf_types.h"
 
@@ -42,23 +44,23 @@ void cbf_step(void)
   SL_Bus_cbf_std_msgs_Bool b_varargout_2_0;
   SL_Bus_cbf_std_msgs_Float64 b_varargout_2;
   SL_Bus_cbf_std_msgs_Float64 rtb_BusAssignment1;
+  real_T b_value;
+  real_T b_value_0;
+  real_T b_value_1;
   real_T rtb_cmd_accel;
-  real_T rtb_minmax3015;
-  real_T value;
-  real_T value_0;
-  real_T value_1;
+  real_T rtb_minmax1530;
   boolean_T b_varargout_1;
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe6'
   // MATLABSystem: '<S9>/SourceBlock'
-  b_varargout_1 = Sub_cbf_549.getLatestMessage(&b_varargout_2);
+  b_varargout_1 = Sub_cbf_476.getLatestMessage(&b_varargout_2);
 
   // Outputs for Enabled SubSystem: '<S9>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S16>/Enable'
+  //   EnablePort: '<S15>/Enable'
 
   if (b_varargout_1) {
-    // SignalConversion generated from: '<S16>/In1'
-    cbf_B.In1_g = b_varargout_2;
+    // SignalConversion generated from: '<S15>/In1'
+    cbf_B.In1_o = b_varargout_2;
   }
 
   // End of MATLABSystem: '<S9>/SourceBlock'
@@ -67,14 +69,14 @@ void cbf_step(void)
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe'
   // MATLABSystem: '<S6>/SourceBlock'
-  b_varargout_1 = Sub_cbf_546.getLatestMessage(&b_varargout_2);
+  b_varargout_1 = Sub_cbf_429.getLatestMessage(&b_varargout_2);
 
   // Outputs for Enabled SubSystem: '<S6>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S13>/Enable'
+  //   EnablePort: '<S12>/Enable'
 
   if (b_varargout_1) {
-    // SignalConversion generated from: '<S13>/In1'
-    cbf_B.In1_o = b_varargout_2;
+    // SignalConversion generated from: '<S12>/In1'
+    cbf_B.In1_m = b_varargout_2;
   }
 
   // End of MATLABSystem: '<S6>/SourceBlock'
@@ -83,14 +85,14 @@ void cbf_step(void)
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe4'
   // MATLABSystem: '<S7>/SourceBlock'
-  b_varargout_1 = Sub_cbf_547.getLatestMessage(&cbf_B.BusAssignment2);
+  b_varargout_1 = Sub_cbf_430.getLatestMessage(&cbf_B.BusAssignment2);
 
   // Outputs for Enabled SubSystem: '<S7>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S14>/Enable'
+  //   EnablePort: '<S13>/Enable'
 
   if (b_varargout_1) {
-    // SignalConversion generated from: '<S14>/In1'
-    cbf_B.In1_j = cbf_B.BusAssignment2;
+    // SignalConversion generated from: '<S13>/In1'
+    cbf_B.In1_p = cbf_B.BusAssignment2;
   }
 
   // End of MATLABSystem: '<S7>/SourceBlock'
@@ -99,13 +101,13 @@ void cbf_step(void)
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe5'
   // MATLABSystem: '<S8>/SourceBlock'
-  b_varargout_1 = Sub_cbf_548.getLatestMessage(&cbf_B.BusAssignment2);
+  b_varargout_1 = Sub_cbf_431.getLatestMessage(&cbf_B.BusAssignment2);
 
   // Outputs for Enabled SubSystem: '<S8>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S15>/Enable'
+  //   EnablePort: '<S14>/Enable'
 
   if (b_varargout_1) {
-    // SignalConversion generated from: '<S15>/In1'
+    // SignalConversion generated from: '<S14>/In1'
     cbf_B.In1 = cbf_B.BusAssignment2;
   }
 
@@ -113,143 +115,104 @@ void cbf_step(void)
   // End of Outputs for SubSystem: '<S8>/Enabled Subsystem'
   // End of Outputs for SubSystem: '<Root>/Subscribe5'
 
-  // Outputs for Atomic SubSystem: '<Root>/Subscribe8'
-  // MATLABSystem: '<S11>/SourceBlock'
-  b_varargout_1 = Sub_cbf_551.getLatestMessage(&b_varargout_2);
+  // MATLABSystem: '<S11>/Get Parameter2'
+  ParamGet_cbf_448.get_parameter(&b_value);
 
-  // Outputs for Enabled SubSystem: '<S11>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S18>/Enable'
+  // MATLABSystem: '<S11>/Get Parameter1'
+  ParamGet_cbf_447.get_parameter(&b_value_0);
 
-  if (b_varargout_1) {
-    // SignalConversion generated from: '<S18>/In1'
-    cbf_B.In1_d = b_varargout_2;
-  }
+  // MATLABSystem: '<S11>/Get Parameter3'
+  ParamGet_cbf_449.get_parameter(&b_value_1);
 
-  // End of MATLABSystem: '<S11>/SourceBlock'
-  // End of Outputs for SubSystem: '<S11>/Enabled Subsystem'
-  // End of Outputs for SubSystem: '<Root>/Subscribe8'
+  // MATLABSystem: '<S11>/Get Parameter4'
+  ParamGet_cbf_450.get_parameter(&rtb_cmd_accel);
 
-  // MATLABSystem: '<S12>/Get Parameter2'
-  ParamGet_cbf_568.get_parameter(&cbf_B.value);
+  // MATLABSystem: '<S11>/Get Parameter5'
+  ParamGet_cbf_463.get_parameter(&rtb_minmax1530);
 
-  // MATLABSystem: '<S12>/Get Parameter1'
-  ParamGet_cbf_567.get_parameter(&cbf_B.value_c);
+  // MATLAB Function: '<S11>/MATLAB Function1' incorporates:
+  //   MATLABSystem: '<S11>/Get Parameter1'
+  //   MATLABSystem: '<S11>/Get Parameter2'
+  //   MATLABSystem: '<S11>/Get Parameter3'
+  //   MATLABSystem: '<S11>/Get Parameter4'
+  //   MATLABSystem: '<S11>/Get Parameter5'
 
-  // MATLABSystem: '<S12>/Get Parameter7'
-  ParamGet_cbf_573.get_parameter(&cbf_B.value_k);
-
-  // MATLABSystem: '<S12>/Get Parameter8'
-  ParamGet_cbf_574.get_parameter(&value);
-
-  // MATLABSystem: '<S12>/Get Parameter3'
-  ParamGet_cbf_569.get_parameter(&rtb_cmd_accel);
-
-  // MATLABSystem: '<S12>/Get Parameter4'
-  ParamGet_cbf_570.get_parameter(&rtb_minmax3015);
-
-  // MATLABSystem: '<S12>/Get Parameter5'
-  ParamGet_cbf_571.get_parameter(&value_0);
-
-  // MATLABSystem: '<S12>/Get Parameter9'
-  ParamGet_cbf_575.get_parameter(&value_1);
-
-  // MATLAB Function: '<S12>/MATLAB Function1' incorporates:
-  //   MATLABSystem: '<S12>/Get Parameter1'
-  //   MATLABSystem: '<S12>/Get Parameter2'
-  //   MATLABSystem: '<S12>/Get Parameter3'
-  //   MATLABSystem: '<S12>/Get Parameter4'
-  //   MATLABSystem: '<S12>/Get Parameter5'
-  //   MATLABSystem: '<S12>/Get Parameter7'
-  //   MATLABSystem: '<S12>/Get Parameter8'
-  //   MATLABSystem: '<S12>/Get Parameter9'
-
-  cbf_B.value = ((((cbf_B.value / value - 1.0) * cbf_B.In1_d.Data + -3.0) +
-                  (cbf_B.In1_j.Linear.Z - cbf_B.value * cbf_B.In1_d.Data) *
-                  cbf_B.value_k) + (cbf_B.In1_o.Data - cbf_B.value *
-    cbf_B.In1.Linear.X) * cbf_B.value_c) * (value / cbf_B.value);
-  value = (((-3.0 - cbf_B.In1_d.Data) * value_1 + value_0 * cbf_B.In1_j.Linear.Z)
-           + (cbf_B.In1_o.Data - rtb_cmd_accel) * rtb_minmax3015) * (1.0 / value);
-  if ((cbf_B.value <= value) || rtIsNaN(value)) {
-    rtb_cmd_accel = cbf_B.value;
+  b_value = (cbf_B.In1_m.Data - b_value * cbf_B.In1.Linear.X) * (b_value_0 /
+    b_value) + 1.0 / b_value * cbf_B.In1_p.Linear.Z;
+  b_value_1 = (rtb_cmd_accel + rtb_minmax1530) * cbf_B.In1_p.Linear.Z +
+    rtb_cmd_accel * rtb_minmax1530 * (cbf_B.In1_m.Data - b_value_1);
+  if ((b_value <= b_value_1) || rtIsNaN(b_value_1)) {
+    rtb_cmd_accel = b_value;
   } else {
-    rtb_cmd_accel = value;
+    rtb_cmd_accel = b_value_1;
   }
-
-  // MATLABSystem: '<Root>/Get Parameter3'
-  ParamGet_cbf_540.get_parameter(&rtb_minmax3015);
 
   // Switch: '<Root>/Switch' incorporates:
   //   Constant: '<Root>/Constant2'
   //   SignalConversion generated from: '<Root>/Bus Selector7'
 
   if (cbf_P.Constant2_Value > cbf_P.Switch_Threshold) {
-    // MinMax: '<Root>/Doesn't allow nominal to brake harder than -0.5' incorporates:
-    //   MATLABSystem: '<Root>/Get Parameter3'
+    // MinMax: '<Root>/MinMax' incorporates:
     //   SignalConversion generated from: '<Root>/Bus Selector7'
 
-    if ((cbf_B.In1_g.Data >= rtb_minmax3015) || rtIsNaN(rtb_minmax3015)) {
-      rtb_minmax3015 = cbf_B.In1_g.Data;
-    }
-
-    // End of MinMax: '<Root>/Doesn't allow nominal to brake harder than -0.5'
-
-    // MinMax: '<Root>/MinMax'
-    if ((rtb_cmd_accel <= rtb_minmax3015) || rtIsNaN(rtb_minmax3015)) {
-      rtb_minmax3015 = rtb_cmd_accel;
+    if ((rtb_cmd_accel <= cbf_B.In1_o.Data) || rtIsNaN(cbf_B.In1_o.Data)) {
+      rtb_minmax1530 = rtb_cmd_accel;
+    } else {
+      rtb_minmax1530 = cbf_B.In1_o.Data;
     }
 
     // End of MinMax: '<Root>/MinMax'
   } else {
-    rtb_minmax3015 = cbf_B.In1_g.Data;
+    rtb_minmax1530 = cbf_B.In1_o.Data;
   }
 
   // End of Switch: '<Root>/Switch'
 
-  // Saturate: '<Root>/min//max -3.0//1.5'
-  if (rtb_minmax3015 > cbf_P.minmax3015_UpperSat) {
-    rtb_minmax3015 = cbf_P.minmax3015_UpperSat;
-  } else if (rtb_minmax3015 < cbf_P.minmax3015_LowerSat) {
-    rtb_minmax3015 = cbf_P.minmax3015_LowerSat;
+  // Saturate: '<Root>/min//max -1.5//3.0'
+  if (rtb_minmax1530 > cbf_P.minmax1530_UpperSat) {
+    rtb_minmax1530 = cbf_P.minmax1530_UpperSat;
+  } else if (rtb_minmax1530 < cbf_P.minmax1530_LowerSat) {
+    rtb_minmax1530 = cbf_P.minmax1530_LowerSat;
   }
 
-  // End of Saturate: '<Root>/min//max -3.0//1.5'
+  // End of Saturate: '<Root>/min//max -1.5//3.0'
 
   // BusAssignment: '<Root>/Bus Assignment1'
-  rtb_BusAssignment1.Data = rtb_minmax3015;
+  rtb_BusAssignment1.Data = rtb_minmax1530;
 
   // Outputs for Atomic SubSystem: '<Root>/Publish1'
   // MATLABSystem: '<S4>/SinkBlock'
-  Pub_cbf_543.publish(&rtb_BusAssignment1);
+  Pub_cbf_401.publish(&rtb_BusAssignment1);
 
   // End of Outputs for SubSystem: '<Root>/Publish1'
 
   // BusAssignment: '<Root>/Bus Assignment2' incorporates:
   //   Constant: '<S2>/Constant'
-  //   MATLAB Function: '<S12>/MATLAB Function1'
+  //   MATLAB Function: '<S11>/MATLAB Function1'
   //   SignalConversion generated from: '<Root>/Bus Selector7'
 
   cbf_B.BusAssignment2 = cbf_P.Constant_Value;
-  cbf_B.BusAssignment2.Linear.X = cbf_B.In1_g.Data;
+  cbf_B.BusAssignment2.Linear.X = cbf_B.In1_o.Data;
   cbf_B.BusAssignment2.Linear.Y = rtb_cmd_accel;
-  cbf_B.BusAssignment2.Linear.Z = rtb_minmax3015;
-  cbf_B.BusAssignment2.Angular.Y = cbf_B.value;
-  cbf_B.BusAssignment2.Angular.Z = value;
+  cbf_B.BusAssignment2.Linear.Z = rtb_minmax1530;
+  cbf_B.BusAssignment2.Angular.Y = b_value;
+  cbf_B.BusAssignment2.Angular.Z = b_value_1;
 
   // Outputs for Atomic SubSystem: '<Root>/Publish2'
   // MATLABSystem: '<S5>/SinkBlock'
-  Pub_cbf_544.publish(&cbf_B.BusAssignment2);
+  Pub_cbf_520.publish(&cbf_B.BusAssignment2);
 
   // End of Outputs for SubSystem: '<Root>/Publish2'
 
   // MATLAB Function: '<Root>/MATLAB Function1'
   cbf_DW.relative_distance_prev_not_empt = true;
 
-  // MATLABSystem: '<S12>/Get Parameter6'
-  ParamGet_cbf_572.get_parameter(&cbf_B.value);
+  // MATLABSystem: '<S11>/Get Parameter6'
+  ParamGet_cbf_465.get_parameter(&b_value);
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe7'
   // MATLABSystem: '<S10>/SourceBlock'
-  Sub_cbf_550.getLatestMessage(&b_varargout_2_0);
+  Sub_cbf_481.getLatestMessage(&b_varargout_2_0);
 
   // End of Outputs for SubSystem: '<Root>/Subscribe7'
 }
@@ -263,11 +226,12 @@ void cbf_initialize(void)
   rt_InitInfAndNaN(sizeof(real_T));
 
   {
+    int32_T i;
+    char_T b_zeroDelimTopic_3[15];
     char_T b_zeroDelimTopic[14];
     char_T b_zeroDelimTopic_0[10];
     char_T b_zeroDelimTopic_1[8];
-    char_T b_zeroDelimName[7];
-    char_T b_zeroDelimTopic_3[6];
+    char_T b_zeroDelimName[6];
     char_T b_zeroDelimTopic_2[4];
     char_T b_zeroDelimName_0[3];
     static const char_T tmp[13] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l',
@@ -278,341 +242,235 @@ void cbf_initialize(void)
 
     static const char_T tmp_1[7] = { 'r', 'e', 'l', '_', 'v', 'e', 'l' };
 
-    static const char_T tmp_2[5] = { 'a', 'c', 'c', 'e', 'l' };
-
-    static const char_T tmp_3[9] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l'
+    static const char_T tmp_2[9] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l'
     };
 
-    static const char_T tmp_4[14] = { '/', 'c', 'b', 'f', '/', 'c', 'b', 'f',
+    static const char_T tmp_3[14] = { '/', 'c', 'b', 'f', '/', 'c', 'b', 'f',
       '_', 'd', 'e', 'b', 'u', 'g' };
 
-    static const char_T tmp_5[24] = { '/', 'c', 'a', 'r', '/', 'h', 'u', 'd',
+    static const char_T tmp_4[24] = { '/', 'c', 'a', 'r', '/', 'h', 'u', 'd',
       '/', 'm', 'i', 'n', 'i', '_', 'c', 'a', 'r', '_', 'e', 'n', 'a', 'b', 'l',
       'e' };
 
-    static const char_T tmp_6[7] = { 't', 'i', 'm', 'e', 'g', 'a', 'p' };
+    static const char_T tmp_5[7] = { 't', 'i', 'm', 'e', 'g', 'a', 'p' };
 
-    static const char_T tmp_7[6] = { 'k', '_', 't', 'g', '_', '0' };
-
-    static const char_T tmp_8[6] = { 'k', '_', 't', 'g', '_', '1' };
-
-    static const char_T tmp_9[6] = { 'k', '_', 'c', 'a', '_', '2' };
-
-    static const char_T tmp_a[5] = { 's', '_', 'm', 'i', 'n' };
-
-    static const char_T tmp_b[6] = { 'k', '_', 'c', 'a', '_', '0' };
-
-    static const char_T tmp_c[6] = { 'k', '_', 'c', 'a', '_', '1' };
-
-    static const char_T tmp_d[9] = { 'a', 'c', 't', '_', 'd', 'e', 'l', 'a', 'y'
+    static const char_T tmp_6[9] = { 'k', '_', 't', 'i', 'm', 'e', 'g', 'a', 'p'
     };
 
-    static const char_T tmp_e[20] = { 'a', '_', 'm', 'i', 'n', '_', 'n', 'o',
-      '_', 'b', 'r', 'a', 'k', 'e', '_', 'c', 'h', 'e', 'c', 'k' };
+    static const char_T tmp_7[5] = { 's', '_', 'm', 'i', 'n' };
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe6'
     // SystemInitialize for Enabled SubSystem: '<S9>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S16>/In1' incorporates:
-    //   Outport: '<S16>/Out1'
+    // SystemInitialize for SignalConversion generated from: '<S15>/In1' incorporates:
+    //   Outport: '<S15>/Out1'
 
-    cbf_B.In1_g = cbf_P.Out1_Y0_e;
+    cbf_B.In1_o = cbf_P.Out1_Y0_a;
 
     // End of SystemInitialize for SubSystem: '<S9>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S9>/SourceBlock'
-    cbf_DW.obj_j.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_j.isInitialized = 1;
-    for (int32_T i = 0; i < 13; i++) {
+    cbf_DW.obj_n0.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_n0.isInitialized = 1;
+    for (i = 0; i < 13; i++) {
       b_zeroDelimTopic[i] = tmp[i];
     }
 
     b_zeroDelimTopic[13] = '\x00';
-    Sub_cbf_549.createSubscriber(&b_zeroDelimTopic[0], 1);
-    cbf_DW.obj_j.isSetupComplete = true;
+    Sub_cbf_476.createSubscriber(&b_zeroDelimTopic[0], 1);
+    cbf_DW.obj_n0.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S9>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe6'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe'
     // SystemInitialize for Enabled SubSystem: '<S6>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S13>/In1' incorporates:
-    //   Outport: '<S13>/Out1'
+    // SystemInitialize for SignalConversion generated from: '<S12>/In1' incorporates:
+    //   Outport: '<S12>/Out1'
 
-    cbf_B.In1_o = cbf_P.Out1_Y0_k;
+    cbf_B.In1_m = cbf_P.Out1_Y0_f;
 
     // End of SystemInitialize for SubSystem: '<S6>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S6>/SourceBlock'
-    cbf_DW.obj_mg.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_mg.isInitialized = 1;
-    for (int32_T i = 0; i < 9; i++) {
+    cbf_DW.obj_f.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_f.isInitialized = 1;
+    for (i = 0; i < 9; i++) {
       b_zeroDelimTopic_0[i] = tmp_0[i];
     }
 
     b_zeroDelimTopic_0[9] = '\x00';
-    Sub_cbf_546.createSubscriber(&b_zeroDelimTopic_0[0], 1);
-    cbf_DW.obj_mg.isSetupComplete = true;
+    Sub_cbf_429.createSubscriber(&b_zeroDelimTopic_0[0], 1);
+    cbf_DW.obj_f.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S6>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe4'
     // SystemInitialize for Enabled SubSystem: '<S7>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S14>/In1' incorporates:
-    //   Outport: '<S14>/Out1'
+    // SystemInitialize for SignalConversion generated from: '<S13>/In1' incorporates:
+    //   Outport: '<S13>/Out1'
 
-    cbf_B.In1_j = cbf_P.Out1_Y0;
+    cbf_B.In1_p = cbf_P.Out1_Y0;
 
     // End of SystemInitialize for SubSystem: '<S7>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S7>/SourceBlock'
-    cbf_DW.obj_c.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_c.isInitialized = 1;
-    for (int32_T i = 0; i < 7; i++) {
+    cbf_DW.obj_o.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_o.isInitialized = 1;
+    for (i = 0; i < 7; i++) {
       b_zeroDelimTopic_1[i] = tmp_1[i];
     }
 
     b_zeroDelimTopic_1[7] = '\x00';
-    Sub_cbf_547.createSubscriber(&b_zeroDelimTopic_1[0], 1);
-    cbf_DW.obj_c.isSetupComplete = true;
+    Sub_cbf_430.createSubscriber(&b_zeroDelimTopic_1[0], 1);
+    cbf_DW.obj_o.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S7>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe4'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe5'
     // SystemInitialize for Enabled SubSystem: '<S8>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S15>/In1' incorporates:
-    //   Outport: '<S15>/Out1'
+    // SystemInitialize for SignalConversion generated from: '<S14>/In1' incorporates:
+    //   Outport: '<S14>/Out1'
 
-    cbf_B.In1 = cbf_P.Out1_Y0_m;
+    cbf_B.In1 = cbf_P.Out1_Y0_k;
 
     // End of SystemInitialize for SubSystem: '<S8>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S8>/SourceBlock'
-    cbf_DW.obj_i.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_i.isInitialized = 1;
+    cbf_DW.obj_is.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_is.isInitialized = 1;
     b_zeroDelimTopic_2[0] = 'v';
     b_zeroDelimTopic_2[1] = 'e';
     b_zeroDelimTopic_2[2] = 'l';
     b_zeroDelimTopic_2[3] = '\x00';
-    Sub_cbf_548.createSubscriber(&b_zeroDelimTopic_2[0], 1);
-    cbf_DW.obj_i.isSetupComplete = true;
+    Sub_cbf_431.createSubscriber(&b_zeroDelimTopic_2[0], 1);
+    cbf_DW.obj_is.isSetupComplete = true;
 
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe5'
 
-    // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe8'
-    // SystemInitialize for Enabled SubSystem: '<S11>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S18>/In1' incorporates:
-    //   Outport: '<S18>/Out1'
-
-    cbf_B.In1_d = cbf_P.Out1_Y0_p;
-
-    // End of SystemInitialize for SubSystem: '<S11>/Enabled Subsystem'
-
-    // Start for MATLABSystem: '<S11>/SourceBlock'
-    cbf_DW.obj_f.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_f.isInitialized = 1;
-    for (int32_T i = 0; i < 5; i++) {
-      b_zeroDelimTopic_3[i] = tmp_2[i];
-    }
-
-    b_zeroDelimTopic_3[5] = '\x00';
-    Sub_cbf_551.createSubscriber(&b_zeroDelimTopic_3[0], 1);
-    cbf_DW.obj_f.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S11>/SourceBlock'
-    // End of SystemInitialize for SubSystem: '<Root>/Subscribe8'
-
     // SystemInitialize for Atomic SubSystem: '<Root>/Publish1'
     // Start for MATLABSystem: '<S4>/SinkBlock'
-    cbf_DW.obj_np.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_np.isInitialized = 1;
-    for (int32_T i = 0; i < 9; i++) {
-      b_zeroDelimTopic_0[i] = tmp_3[i];
+    cbf_DW.obj_c.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_c.isInitialized = 1;
+    for (i = 0; i < 9; i++) {
+      b_zeroDelimTopic_0[i] = tmp_2[i];
     }
 
     b_zeroDelimTopic_0[9] = '\x00';
-    Pub_cbf_543.createPublisher(&b_zeroDelimTopic_0[0], 1);
-    cbf_DW.obj_np.isSetupComplete = true;
+    Pub_cbf_401.createPublisher(&b_zeroDelimTopic_0[0], 1);
+    cbf_DW.obj_c.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S4>/SinkBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Publish1'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Publish2'
     // Start for MATLABSystem: '<S5>/SinkBlock'
-    cbf_DW.obj_p.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_p.isInitialized = 1;
-    for (int32_T i = 0; i < 14; i++) {
-      cbf_B.b_zeroDelimTopic_m[i] = tmp_4[i];
+    cbf_DW.obj_j.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_j.isInitialized = 1;
+    for (i = 0; i < 14; i++) {
+      b_zeroDelimTopic_3[i] = tmp_3[i];
     }
 
-    cbf_B.b_zeroDelimTopic_m[14] = '\x00';
-    Pub_cbf_544.createPublisher(&cbf_B.b_zeroDelimTopic_m[0], 1);
-    cbf_DW.obj_p.isSetupComplete = true;
+    b_zeroDelimTopic_3[14] = '\x00';
+    Pub_cbf_520.createPublisher(&b_zeroDelimTopic_3[0], 1);
+    cbf_DW.obj_j.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S5>/SinkBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Publish2'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe7'
     // Start for MATLABSystem: '<S10>/SourceBlock'
-    cbf_DW.obj_e.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_e.isInitialized = 1;
-    for (int32_T i = 0; i < 24; i++) {
-      cbf_B.b_zeroDelimTopic[i] = tmp_5[i];
+    cbf_DW.obj_d.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_d.isInitialized = 1;
+    for (i = 0; i < 24; i++) {
+      cbf_B.b_zeroDelimTopic[i] = tmp_4[i];
     }
 
     cbf_B.b_zeroDelimTopic[24] = '\x00';
-    Sub_cbf_550.createSubscriber(&cbf_B.b_zeroDelimTopic[0], 1);
-    cbf_DW.obj_e.isSetupComplete = true;
+    Sub_cbf_481.createSubscriber(&cbf_B.b_zeroDelimTopic[0], 1);
+    cbf_DW.obj_d.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S10>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe7'
 
-    // Start for MATLABSystem: '<S12>/Get Parameter2'
-    cbf_DW.obj_m.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_m.isInitialized = 1;
-    for (int32_T i = 0; i < 7; i++) {
-      b_zeroDelimTopic_1[i] = tmp_6[i];
+    // Start for MATLABSystem: '<S11>/Get Parameter2'
+    cbf_DW.obj_p.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_p.isInitialized = 1;
+    for (i = 0; i < 7; i++) {
+      b_zeroDelimTopic_1[i] = tmp_5[i];
     }
 
     b_zeroDelimTopic_1[7] = '\x00';
-    ParamGet_cbf_568.initialize(&b_zeroDelimTopic_1[0]);
-    ParamGet_cbf_568.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_568.set_initial_value(2.0);
-    cbf_DW.obj_m.isSetupComplete = true;
+    ParamGet_cbf_448.initialize(&b_zeroDelimTopic_1[0]);
+    ParamGet_cbf_448.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_cbf_448.set_initial_value(2.0);
+    cbf_DW.obj_p.isSetupComplete = true;
 
-    // End of Start for MATLABSystem: '<S12>/Get Parameter2'
+    // End of Start for MATLABSystem: '<S11>/Get Parameter2'
 
-    // Start for MATLABSystem: '<S12>/Get Parameter1'
+    // Start for MATLABSystem: '<S11>/Get Parameter1'
     cbf_DW.obj_n.matlabCodegenIsDeleted = false;
     cbf_DW.obj_n.isInitialized = 1;
-    for (int32_T i = 0; i < 6; i++) {
-      b_zeroDelimName[i] = tmp_7[i];
-    }
-
-    b_zeroDelimName[6] = '\x00';
-    ParamGet_cbf_567.initialize(&b_zeroDelimName[0]);
-    ParamGet_cbf_567.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_567.set_initial_value(0.1);
-    cbf_DW.obj_n.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/Get Parameter1'
-
-    // Start for MATLABSystem: '<S12>/Get Parameter7'
-    cbf_DW.obj_h.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_h.isInitialized = 1;
-    for (int32_T i = 0; i < 6; i++) {
-      b_zeroDelimName[i] = tmp_8[i];
-    }
-
-    b_zeroDelimName[6] = '\x00';
-    ParamGet_cbf_573.initialize(&b_zeroDelimName[0]);
-    ParamGet_cbf_573.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_573.set_initial_value(0.2);
-    cbf_DW.obj_h.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/Get Parameter7'
-
-    // Start for MATLABSystem: '<S12>/Get Parameter8'
-    cbf_DW.obj_b.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_b.isInitialized = 1;
-    for (int32_T i = 0; i < 6; i++) {
-      b_zeroDelimName[i] = tmp_9[i];
-    }
-
-    b_zeroDelimName[6] = '\x00';
-    ParamGet_cbf_574.initialize(&b_zeroDelimName[0]);
-    ParamGet_cbf_574.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_574.set_initial_value(0.1);
-    cbf_DW.obj_b.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/Get Parameter8'
-
-    // Start for MATLABSystem: '<S12>/Get Parameter3'
-    cbf_DW.obj_bu.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_bu.isInitialized = 1;
-    for (int32_T i = 0; i < 5; i++) {
-      b_zeroDelimTopic_3[i] = tmp_a[i];
-    }
-
-    b_zeroDelimTopic_3[5] = '\x00';
-    ParamGet_cbf_569.initialize(&b_zeroDelimTopic_3[0]);
-    ParamGet_cbf_569.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_569.set_initial_value(5.0);
-    cbf_DW.obj_bu.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/Get Parameter3'
-
-    // Start for MATLABSystem: '<S12>/Get Parameter4'
-    cbf_DW.obj_l.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_l.isInitialized = 1;
-    for (int32_T i = 0; i < 6; i++) {
-      b_zeroDelimName[i] = tmp_b[i];
-    }
-
-    b_zeroDelimName[6] = '\x00';
-    ParamGet_cbf_570.initialize(&b_zeroDelimName[0]);
-    ParamGet_cbf_570.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_570.set_initial_value(0.05);
-    cbf_DW.obj_l.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/Get Parameter4'
-
-    // Start for MATLABSystem: '<S12>/Get Parameter5'
-    cbf_DW.obj_bw.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_bw.isInitialized = 1;
-    for (int32_T i = 0; i < 6; i++) {
-      b_zeroDelimName[i] = tmp_c[i];
-    }
-
-    b_zeroDelimName[6] = '\x00';
-    ParamGet_cbf_571.initialize(&b_zeroDelimName[0]);
-    ParamGet_cbf_571.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_571.set_initial_value(0.05);
-    cbf_DW.obj_bw.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/Get Parameter5'
-
-    // Start for MATLABSystem: '<S12>/Get Parameter9'
-    cbf_DW.obj.matlabCodegenIsDeleted = false;
-    cbf_DW.obj.isInitialized = 1;
-    for (int32_T i = 0; i < 9; i++) {
-      b_zeroDelimTopic_0[i] = tmp_d[i];
+    for (i = 0; i < 9; i++) {
+      b_zeroDelimTopic_0[i] = tmp_6[i];
     }
 
     b_zeroDelimTopic_0[9] = '\x00';
-    ParamGet_cbf_575.initialize(&b_zeroDelimTopic_0[0]);
-    ParamGet_cbf_575.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_575.set_initial_value(0.2);
-    cbf_DW.obj.isSetupComplete = true;
+    ParamGet_cbf_447.initialize(&b_zeroDelimTopic_0[0]);
+    ParamGet_cbf_447.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_cbf_447.set_initial_value(0.1);
+    cbf_DW.obj_n.isSetupComplete = true;
 
-    // End of Start for MATLABSystem: '<S12>/Get Parameter9'
+    // End of Start for MATLABSystem: '<S11>/Get Parameter1'
 
-    // Start for MATLABSystem: '<Root>/Get Parameter3'
-    cbf_DW.obj_lp.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_lp.isInitialized = 1;
-    for (int32_T i = 0; i < 20; i++) {
-      cbf_B.b_zeroDelimName[i] = tmp_e[i];
+    // Start for MATLABSystem: '<S11>/Get Parameter3'
+    cbf_DW.obj_i.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_i.isInitialized = 1;
+    for (i = 0; i < 5; i++) {
+      b_zeroDelimName[i] = tmp_7[i];
     }
 
-    cbf_B.b_zeroDelimName[20] = '\x00';
-    ParamGet_cbf_540.initialize(&cbf_B.b_zeroDelimName[0]);
-    ParamGet_cbf_540.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_540.set_initial_value(-0.5);
-    cbf_DW.obj_lp.isSetupComplete = true;
+    b_zeroDelimName[5] = '\x00';
+    ParamGet_cbf_449.initialize(&b_zeroDelimName[0]);
+    ParamGet_cbf_449.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_cbf_449.set_initial_value(15.0);
+    cbf_DW.obj_i.isSetupComplete = true;
 
-    // End of Start for MATLABSystem: '<Root>/Get Parameter3'
+    // End of Start for MATLABSystem: '<S11>/Get Parameter3'
 
-    // Start for MATLABSystem: '<S12>/Get Parameter6'
+    // Start for MATLABSystem: '<S11>/Get Parameter4'
     cbf_DW.obj_k.matlabCodegenIsDeleted = false;
     cbf_DW.obj_k.isInitialized = 1;
+    b_zeroDelimName_0[0] = 'k';
+    b_zeroDelimName_0[1] = '1';
+    b_zeroDelimName_0[2] = '\x00';
+    ParamGet_cbf_450.initialize(&b_zeroDelimName_0[0]);
+    ParamGet_cbf_450.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_cbf_450.set_initial_value(0.5);
+    cbf_DW.obj_k.isSetupComplete = true;
+
+    // Start for MATLABSystem: '<S11>/Get Parameter5'
+    cbf_DW.obj_e.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_e.isInitialized = 1;
+    b_zeroDelimName_0[0] = 'k';
+    b_zeroDelimName_0[1] = '2';
+    b_zeroDelimName_0[2] = '\x00';
+    ParamGet_cbf_463.initialize(&b_zeroDelimName_0[0]);
+    ParamGet_cbf_463.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_cbf_463.set_initial_value(0.5);
+    cbf_DW.obj_e.isSetupComplete = true;
+
+    // Start for MATLABSystem: '<S11>/Get Parameter6'
+    cbf_DW.obj.matlabCodegenIsDeleted = false;
+    cbf_DW.obj.isInitialized = 1;
     b_zeroDelimName_0[0] = 'w';
     b_zeroDelimName_0[1] = '3';
     b_zeroDelimName_0[2] = '\x00';
-    ParamGet_cbf_572.initialize(&b_zeroDelimName_0[0]);
-    ParamGet_cbf_572.initialize_error_codes(0, 1, 2, 3);
-    ParamGet_cbf_572.set_initial_value(6.0);
-    cbf_DW.obj_k.isSetupComplete = true;
+    ParamGet_cbf_465.initialize(&b_zeroDelimName_0[0]);
+    ParamGet_cbf_465.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_cbf_465.set_initial_value(6.0);
+    cbf_DW.obj.isSetupComplete = true;
   }
 }
 
@@ -621,8 +479,8 @@ void cbf_terminate(void)
 {
   // Terminate for Atomic SubSystem: '<Root>/Subscribe6'
   // Terminate for MATLABSystem: '<S9>/SourceBlock'
-  if (!cbf_DW.obj_j.matlabCodegenIsDeleted) {
-    cbf_DW.obj_j.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_n0.matlabCodegenIsDeleted) {
+    cbf_DW.obj_n0.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S9>/SourceBlock'
@@ -630,8 +488,8 @@ void cbf_terminate(void)
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe'
   // Terminate for MATLABSystem: '<S6>/SourceBlock'
-  if (!cbf_DW.obj_mg.matlabCodegenIsDeleted) {
-    cbf_DW.obj_mg.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_f.matlabCodegenIsDeleted) {
+    cbf_DW.obj_f.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S6>/SourceBlock'
@@ -639,8 +497,8 @@ void cbf_terminate(void)
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe4'
   // Terminate for MATLABSystem: '<S7>/SourceBlock'
-  if (!cbf_DW.obj_c.matlabCodegenIsDeleted) {
-    cbf_DW.obj_c.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_o.matlabCodegenIsDeleted) {
+    cbf_DW.obj_o.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S7>/SourceBlock'
@@ -648,89 +506,52 @@ void cbf_terminate(void)
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe5'
   // Terminate for MATLABSystem: '<S8>/SourceBlock'
-  if (!cbf_DW.obj_i.matlabCodegenIsDeleted) {
-    cbf_DW.obj_i.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_is.matlabCodegenIsDeleted) {
+    cbf_DW.obj_is.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S8>/SourceBlock'
   // End of Terminate for SubSystem: '<Root>/Subscribe5'
 
-  // Terminate for Atomic SubSystem: '<Root>/Subscribe8'
-  // Terminate for MATLABSystem: '<S11>/SourceBlock'
-  if (!cbf_DW.obj_f.matlabCodegenIsDeleted) {
-    cbf_DW.obj_f.matlabCodegenIsDeleted = true;
+  // Terminate for MATLABSystem: '<S11>/Get Parameter2'
+  if (!cbf_DW.obj_p.matlabCodegenIsDeleted) {
+    cbf_DW.obj_p.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S11>/SourceBlock'
-  // End of Terminate for SubSystem: '<Root>/Subscribe8'
+  // End of Terminate for MATLABSystem: '<S11>/Get Parameter2'
 
-  // Terminate for MATLABSystem: '<S12>/Get Parameter2'
-  if (!cbf_DW.obj_m.matlabCodegenIsDeleted) {
-    cbf_DW.obj_m.matlabCodegenIsDeleted = true;
-  }
-
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter2'
-
-  // Terminate for MATLABSystem: '<S12>/Get Parameter1'
+  // Terminate for MATLABSystem: '<S11>/Get Parameter1'
   if (!cbf_DW.obj_n.matlabCodegenIsDeleted) {
     cbf_DW.obj_n.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter1'
+  // End of Terminate for MATLABSystem: '<S11>/Get Parameter1'
 
-  // Terminate for MATLABSystem: '<S12>/Get Parameter7'
-  if (!cbf_DW.obj_h.matlabCodegenIsDeleted) {
-    cbf_DW.obj_h.matlabCodegenIsDeleted = true;
+  // Terminate for MATLABSystem: '<S11>/Get Parameter3'
+  if (!cbf_DW.obj_i.matlabCodegenIsDeleted) {
+    cbf_DW.obj_i.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter7'
+  // End of Terminate for MATLABSystem: '<S11>/Get Parameter3'
 
-  // Terminate for MATLABSystem: '<S12>/Get Parameter8'
-  if (!cbf_DW.obj_b.matlabCodegenIsDeleted) {
-    cbf_DW.obj_b.matlabCodegenIsDeleted = true;
+  // Terminate for MATLABSystem: '<S11>/Get Parameter4'
+  if (!cbf_DW.obj_k.matlabCodegenIsDeleted) {
+    cbf_DW.obj_k.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter8'
+  // End of Terminate for MATLABSystem: '<S11>/Get Parameter4'
 
-  // Terminate for MATLABSystem: '<S12>/Get Parameter3'
-  if (!cbf_DW.obj_bu.matlabCodegenIsDeleted) {
-    cbf_DW.obj_bu.matlabCodegenIsDeleted = true;
+  // Terminate for MATLABSystem: '<S11>/Get Parameter5'
+  if (!cbf_DW.obj_e.matlabCodegenIsDeleted) {
+    cbf_DW.obj_e.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter3'
-
-  // Terminate for MATLABSystem: '<S12>/Get Parameter4'
-  if (!cbf_DW.obj_l.matlabCodegenIsDeleted) {
-    cbf_DW.obj_l.matlabCodegenIsDeleted = true;
-  }
-
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter4'
-
-  // Terminate for MATLABSystem: '<S12>/Get Parameter5'
-  if (!cbf_DW.obj_bw.matlabCodegenIsDeleted) {
-    cbf_DW.obj_bw.matlabCodegenIsDeleted = true;
-  }
-
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter5'
-
-  // Terminate for MATLABSystem: '<S12>/Get Parameter9'
-  if (!cbf_DW.obj.matlabCodegenIsDeleted) {
-    cbf_DW.obj.matlabCodegenIsDeleted = true;
-  }
-
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter9'
-
-  // Terminate for MATLABSystem: '<Root>/Get Parameter3'
-  if (!cbf_DW.obj_lp.matlabCodegenIsDeleted) {
-    cbf_DW.obj_lp.matlabCodegenIsDeleted = true;
-  }
-
-  // End of Terminate for MATLABSystem: '<Root>/Get Parameter3'
+  // End of Terminate for MATLABSystem: '<S11>/Get Parameter5'
 
   // Terminate for Atomic SubSystem: '<Root>/Publish1'
   // Terminate for MATLABSystem: '<S4>/SinkBlock'
-  if (!cbf_DW.obj_np.matlabCodegenIsDeleted) {
-    cbf_DW.obj_np.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_c.matlabCodegenIsDeleted) {
+    cbf_DW.obj_c.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S4>/SinkBlock'
@@ -738,24 +559,24 @@ void cbf_terminate(void)
 
   // Terminate for Atomic SubSystem: '<Root>/Publish2'
   // Terminate for MATLABSystem: '<S5>/SinkBlock'
-  if (!cbf_DW.obj_p.matlabCodegenIsDeleted) {
-    cbf_DW.obj_p.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_j.matlabCodegenIsDeleted) {
+    cbf_DW.obj_j.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S5>/SinkBlock'
   // End of Terminate for SubSystem: '<Root>/Publish2'
 
-  // Terminate for MATLABSystem: '<S12>/Get Parameter6'
-  if (!cbf_DW.obj_k.matlabCodegenIsDeleted) {
-    cbf_DW.obj_k.matlabCodegenIsDeleted = true;
+  // Terminate for MATLABSystem: '<S11>/Get Parameter6'
+  if (!cbf_DW.obj.matlabCodegenIsDeleted) {
+    cbf_DW.obj.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S12>/Get Parameter6'
+  // End of Terminate for MATLABSystem: '<S11>/Get Parameter6'
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe7'
   // Terminate for MATLABSystem: '<S10>/SourceBlock'
-  if (!cbf_DW.obj_e.matlabCodegenIsDeleted) {
-    cbf_DW.obj_e.matlabCodegenIsDeleted = true;
+  if (!cbf_DW.obj_d.matlabCodegenIsDeleted) {
+    cbf_DW.obj_d.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S10>/SourceBlock'

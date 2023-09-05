@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:01 2022
+// Model version                  : 3.81
+// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+// C/C++ source code generated on : Tue Sep  5 12:07:59 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -19,21 +19,26 @@
 
 #include "rtwtypes.h"
 
-extern "C" {
+extern "C"
+{
 
 #include "rtGetInf.h"
 
 }
+
 #include <stddef.h>
 
-extern "C" {
+extern "C"
+{
 
 #include "rt_nonfinite.h"
 
 }
+
 #define NumBitsPerChar                 8U
 
-extern "C" {
+extern "C"
+{
   //
   // Initialize rtInf needed by the generated code.
   // Inf is initialized as non-signaling. Assumes IEEE.
@@ -152,6 +157,7 @@ extern "C" {
     return minfF.wordL.wordLreal;
   }
 }
+
 //
 // File trailer for generated code.
 //
