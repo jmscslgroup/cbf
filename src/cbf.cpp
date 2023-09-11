@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.0
+// Model version                  : 7.1
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Sep  5 15:13:21 2023
+// C/C++ source code generated on : Mon Sep 11 11:03:55 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -168,14 +168,14 @@ void cbf_step(void)
 
   // End of Switch: '<Root>/Switch'
 
-  // Saturate: '<Root>/min//max -1.5//3.0'
+  // Saturate: '<Root>/min//max 1.5//-3.0'
   if (rtb_minmax1530 > cbf_P.minmax1530_UpperSat) {
     rtb_minmax1530 = cbf_P.minmax1530_UpperSat;
   } else if (rtb_minmax1530 < cbf_P.minmax1530_LowerSat) {
     rtb_minmax1530 = cbf_P.minmax1530_LowerSat;
   }
 
-  // End of Saturate: '<Root>/min//max -1.5//3.0'
+  // End of Saturate: '<Root>/min//max 1.5//-3.0'
 
   // BusAssignment: '<Root>/Bus Assignment1'
   rtb_BusAssignment1.Data = rtb_minmax1530;

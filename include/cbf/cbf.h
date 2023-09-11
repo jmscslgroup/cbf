@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.0
+// Model version                  : 7.1
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Sep  5 15:13:21 2023
+// C/C++ source code generated on : Mon Sep 11 11:03:55 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -114,11 +114,11 @@ struct P_cbf_T_ {
   real_T Switch_Threshold;             // Expression: 0.5
                                           //  Referenced by: '<Root>/Switch'
 
-  real_T minmax1530_UpperSat;          // Expression: 3.0
-                                          //  Referenced by: '<Root>/min//max -1.5//3.0'
+  real_T minmax1530_UpperSat;          // Expression: 1.5
+                                          //  Referenced by: '<Root>/min//max 1.5//-3.0'
 
-  real_T minmax1530_LowerSat;          // Expression: -1.5
-                                          //  Referenced by: '<Root>/min//max -1.5//3.0'
+  real_T minmax1530_LowerSat;          // Expression: -3.0
+                                          //  Referenced by: '<Root>/min//max 1.5//-3.0'
 
   real_T Constant1_Value;              // Expression: 5
                                           //  Referenced by: '<Root>/Constant1'
