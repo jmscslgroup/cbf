@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.1
+// Model version                  : 7.3
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Mon Sep 11 11:04:06 2023
+// C/C++ source code generated on : Thu Oct 05 14:34:33 2023
 //
 
 #ifndef _ROS_MATLAB_NODEINTERFACE_
