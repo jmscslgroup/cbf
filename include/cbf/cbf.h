@@ -9,7 +9,7 @@
 //
 // Model version                  : 7.3
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Thu Oct  5 14:34:23 2023
+// C/C++ source code generated on : Thu Oct 12 14:21:34 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -45,10 +45,11 @@ extern "C"
 // Block signals (default storage)
 struct B_cbf_T {
   SL_Bus_cbf_geometry_msgs_Twist In1;  // '<S14>/In1'
-  SL_Bus_cbf_geometry_msgs_Twist In1_p;// '<S13>/In1'
   SL_Bus_cbf_geometry_msgs_Twist BusAssignment2;// '<Root>/Bus Assignment2'
   char_T b_zeroDelimTopic[25];
+  char_T b_zeroDelimTopic_m[17];
   SL_Bus_cbf_std_msgs_Float64 In1_o;   // '<S15>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1_f;   // '<S13>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_m;   // '<S12>/In1'
 };
 
@@ -64,8 +65,8 @@ struct DW_cbf_T {
   ros_slroscpp_internal_block_P_T obj_c;// '<S4>/SinkBlock'
   ros_slroscpp_internal_block_S_T obj_d;// '<S10>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_n0;// '<S9>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_is;// '<S8>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_o;// '<S7>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_o;// '<S8>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_h;// '<S7>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_f;// '<S6>/SourceBlock'
   boolean_T relative_distance_prev_not_empt;// '<Root>/MATLAB Function1'
 };
@@ -76,16 +77,10 @@ struct P_cbf_T_ {
                                                    //  Referenced by: '<S2>/Constant'
 
   SL_Bus_cbf_geometry_msgs_Twist Out1_Y0;// Computed Parameter: Out1_Y0
-                                            //  Referenced by: '<S13>/Out1'
+                                            //  Referenced by: '<S14>/Out1'
 
   SL_Bus_cbf_geometry_msgs_Twist Constant_Value_p;// Computed Parameter: Constant_Value_p
-                                                     //  Referenced by: '<S7>/Constant'
-
-  SL_Bus_cbf_geometry_msgs_Twist Out1_Y0_k;// Computed Parameter: Out1_Y0_k
-                                              //  Referenced by: '<S14>/Out1'
-
-  SL_Bus_cbf_geometry_msgs_Twist Constant_Value_pq;// Computed Parameter: Constant_Value_pq
-                                                      //  Referenced by: '<S8>/Constant'
+                                                     //  Referenced by: '<S8>/Constant'
 
   SL_Bus_cbf_std_msgs_Bool Out1_Y0_o;  // Computed Parameter: Out1_Y0_o
                                           //  Referenced by: '<S16>/Out1'
@@ -102,6 +97,12 @@ struct P_cbf_T_ {
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_k;// Computed Parameter: Constant_Value_k
                                                   //  Referenced by: '<S6>/Constant'
 
+  SL_Bus_cbf_std_msgs_Float64 Out1_Y0_n;// Computed Parameter: Out1_Y0_n
+                                           //  Referenced by: '<S13>/Out1'
+
+  SL_Bus_cbf_std_msgs_Float64 Constant_Value_l;// Computed Parameter: Constant_Value_l
+                                                  //  Referenced by: '<S7>/Constant'
+
   SL_Bus_cbf_std_msgs_Float64 Out1_Y0_a;// Computed Parameter: Out1_Y0_a
                                            //  Referenced by: '<S15>/Out1'
 
@@ -117,7 +118,7 @@ struct P_cbf_T_ {
   real_T minmax1530_UpperSat;          // Expression: 1.5
                                           //  Referenced by: '<Root>/min//max 1.5//-3.0'
 
-  real_T minmax1530_LowerSat;          // Expression: -3.0
+  real_T minmax1530_LowerSat;          // Expression: -5.0
                                           //  Referenced by: '<Root>/min//max 1.5//-3.0'
 
   real_T Constant1_Value;              // Expression: 5
@@ -229,14 +230,14 @@ extern volatile boolean_T runModel;
 //  '<S4>'   : 'cbf/Publish1'
 //  '<S5>'   : 'cbf/Publish2'
 //  '<S6>'   : 'cbf/Subscribe'
-//  '<S7>'   : 'cbf/Subscribe4'
-//  '<S8>'   : 'cbf/Subscribe5'
+//  '<S7>'   : 'cbf/Subscribe1'
+//  '<S8>'   : 'cbf/Subscribe4'
 //  '<S9>'   : 'cbf/Subscribe6'
 //  '<S10>'  : 'cbf/Subscribe7'
 //  '<S11>'  : 'cbf/cbf_filter'
 //  '<S12>'  : 'cbf/Subscribe/Enabled Subsystem'
-//  '<S13>'  : 'cbf/Subscribe4/Enabled Subsystem'
-//  '<S14>'  : 'cbf/Subscribe5/Enabled Subsystem'
+//  '<S13>'  : 'cbf/Subscribe1/Enabled Subsystem'
+//  '<S14>'  : 'cbf/Subscribe4/Enabled Subsystem'
 //  '<S15>'  : 'cbf/Subscribe6/Enabled Subsystem'
 //  '<S16>'  : 'cbf/Subscribe7/Enabled Subsystem'
 //  '<S17>'  : 'cbf/cbf_filter/MATLAB Function1'
