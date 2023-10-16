@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.3
+// Model version                  : 7.4
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Thu Oct 12 14:21:34 2023
+// C/C++ source code generated on : Mon Oct 16 11:14:16 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -44,11 +44,11 @@ extern "C"
 
 // Block signals (default storage)
 struct B_cbf_T {
-  SL_Bus_cbf_geometry_msgs_Twist In1;  // '<S14>/In1'
   SL_Bus_cbf_geometry_msgs_Twist BusAssignment2;// '<Root>/Bus Assignment2'
   char_T b_zeroDelimTopic[25];
   char_T b_zeroDelimTopic_m[17];
-  SL_Bus_cbf_std_msgs_Float64 In1_o;   // '<S15>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1;     // '<S15>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1_p;   // '<S14>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_f;   // '<S13>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_m;   // '<S12>/In1'
 };
@@ -76,13 +76,7 @@ struct P_cbf_T_ {
   SL_Bus_cbf_geometry_msgs_Twist Constant_Value;// Computed Parameter: Constant_Value
                                                    //  Referenced by: '<S2>/Constant'
 
-  SL_Bus_cbf_geometry_msgs_Twist Out1_Y0;// Computed Parameter: Out1_Y0
-                                            //  Referenced by: '<S14>/Out1'
-
-  SL_Bus_cbf_geometry_msgs_Twist Constant_Value_p;// Computed Parameter: Constant_Value_p
-                                                     //  Referenced by: '<S8>/Constant'
-
-  SL_Bus_cbf_std_msgs_Bool Out1_Y0_o;  // Computed Parameter: Out1_Y0_o
+  SL_Bus_cbf_std_msgs_Bool Out1_Y0;    // Computed Parameter: Out1_Y0
                                           //  Referenced by: '<S16>/Out1'
 
   SL_Bus_cbf_std_msgs_Bool Constant_Value_o;// Computed Parameter: Constant_Value_o
@@ -103,6 +97,12 @@ struct P_cbf_T_ {
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_l;// Computed Parameter: Constant_Value_l
                                                   //  Referenced by: '<S7>/Constant'
 
+  SL_Bus_cbf_std_msgs_Float64 Out1_Y0_p;// Computed Parameter: Out1_Y0_p
+                                           //  Referenced by: '<S14>/Out1'
+
+  SL_Bus_cbf_std_msgs_Float64 Constant_Value_p;// Computed Parameter: Constant_Value_p
+                                                  //  Referenced by: '<S8>/Constant'
+
   SL_Bus_cbf_std_msgs_Float64 Out1_Y0_a;// Computed Parameter: Out1_Y0_a
                                            //  Referenced by: '<S15>/Out1'
 
@@ -115,11 +115,11 @@ struct P_cbf_T_ {
   real_T Switch_Threshold;             // Expression: 0.5
                                           //  Referenced by: '<Root>/Switch'
 
-  real_T minmax1530_UpperSat;          // Expression: 1.5
-                                          //  Referenced by: '<Root>/min//max 1.5//-3.0'
+  real_T minmax1550_UpperSat;          // Expression: 1.5
+                                          //  Referenced by: '<Root>/min//max 1.5//-5.0'
 
-  real_T minmax1530_LowerSat;          // Expression: -5.0
-                                          //  Referenced by: '<Root>/min//max 1.5//-3.0'
+  real_T minmax1550_LowerSat;          // Expression: -5.0
+                                          //  Referenced by: '<Root>/min//max 1.5//-5.0'
 
   real_T Constant1_Value;              // Expression: 5
                                           //  Referenced by: '<Root>/Constant1'

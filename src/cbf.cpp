@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.3
+// Model version                  : 7.4
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Thu Oct 12 14:21:34 2023
+// C/C++ source code generated on : Mon Oct 16 11:14:16 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -48,7 +48,7 @@ void cbf_step(void)
   real_T b_value_0;
   real_T b_value_1;
   real_T rtb_cmd_accel;
-  real_T rtb_minmax1530;
+  real_T rtb_minmax1550;
   boolean_T b_varargout_1;
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe6'
@@ -60,7 +60,7 @@ void cbf_step(void)
 
   if (b_varargout_1) {
     // SignalConversion generated from: '<S15>/In1'
-    cbf_B.In1_o = b_varargout_2;
+    cbf_B.In1 = b_varargout_2;
   }
 
   // End of MATLABSystem: '<S9>/SourceBlock'
@@ -85,14 +85,14 @@ void cbf_step(void)
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe4'
   // MATLABSystem: '<S8>/SourceBlock'
-  b_varargout_1 = Sub_cbf_430.getLatestMessage(&cbf_B.BusAssignment2);
+  b_varargout_1 = Sub_cbf_430.getLatestMessage(&b_varargout_2);
 
   // Outputs for Enabled SubSystem: '<S8>/Enabled Subsystem' incorporates:
   //   EnablePort: '<S14>/Enable'
 
   if (b_varargout_1) {
     // SignalConversion generated from: '<S14>/In1'
-    cbf_B.In1 = cbf_B.BusAssignment2;
+    cbf_B.In1_p = b_varargout_2;
   }
 
   // End of MATLABSystem: '<S8>/SourceBlock'
@@ -128,7 +128,7 @@ void cbf_step(void)
   ParamGet_cbf_450.get_parameter(&rtb_cmd_accel);
 
   // MATLABSystem: '<S11>/Get Parameter5'
-  ParamGet_cbf_463.get_parameter(&rtb_minmax1530);
+  ParamGet_cbf_463.get_parameter(&rtb_minmax1550);
 
   // MATLAB Function: '<S11>/MATLAB Function1' incorporates:
   //   MATLABSystem: '<S11>/Get Parameter1'
@@ -137,10 +137,10 @@ void cbf_step(void)
   //   MATLABSystem: '<S11>/Get Parameter4'
   //   MATLABSystem: '<S11>/Get Parameter5'
 
-  b_value = (cbf_B.In1_m.Data - b_value * cbf_B.In1_f.Data) * (b_value_0 /
-    b_value) + 1.0 / b_value * cbf_B.In1.Linear.Z;
-  b_value_1 = (rtb_cmd_accel + rtb_minmax1530) * cbf_B.In1.Linear.Z +
-    rtb_cmd_accel * rtb_minmax1530 * (cbf_B.In1_m.Data - b_value_1);
+  b_value = ((cbf_B.In1_m.Data - b_value * cbf_B.In1_f.Data) - b_value_1) *
+    (b_value_0 / b_value) + 1.0 / b_value * cbf_B.In1_p.Data;
+  b_value_1 = (rtb_cmd_accel + rtb_minmax1550) * cbf_B.In1_p.Data +
+    rtb_cmd_accel * rtb_minmax1550 * (cbf_B.In1_m.Data - b_value_1);
   if ((b_value <= b_value_1) || rtIsNaN(b_value_1)) {
     rtb_cmd_accel = b_value;
   } else {
@@ -155,30 +155,30 @@ void cbf_step(void)
     // MinMax: '<Root>/MinMax' incorporates:
     //   SignalConversion generated from: '<Root>/Bus Selector7'
 
-    if ((rtb_cmd_accel <= cbf_B.In1_o.Data) || rtIsNaN(cbf_B.In1_o.Data)) {
-      rtb_minmax1530 = rtb_cmd_accel;
+    if ((rtb_cmd_accel <= cbf_B.In1.Data) || rtIsNaN(cbf_B.In1.Data)) {
+      rtb_minmax1550 = rtb_cmd_accel;
     } else {
-      rtb_minmax1530 = cbf_B.In1_o.Data;
+      rtb_minmax1550 = cbf_B.In1.Data;
     }
 
     // End of MinMax: '<Root>/MinMax'
   } else {
-    rtb_minmax1530 = cbf_B.In1_o.Data;
+    rtb_minmax1550 = cbf_B.In1.Data;
   }
 
   // End of Switch: '<Root>/Switch'
 
-  // Saturate: '<Root>/min//max 1.5//-3.0'
-  if (rtb_minmax1530 > cbf_P.minmax1530_UpperSat) {
-    rtb_minmax1530 = cbf_P.minmax1530_UpperSat;
-  } else if (rtb_minmax1530 < cbf_P.minmax1530_LowerSat) {
-    rtb_minmax1530 = cbf_P.minmax1530_LowerSat;
+  // Saturate: '<Root>/min//max 1.5//-5.0'
+  if (rtb_minmax1550 > cbf_P.minmax1550_UpperSat) {
+    rtb_minmax1550 = cbf_P.minmax1550_UpperSat;
+  } else if (rtb_minmax1550 < cbf_P.minmax1550_LowerSat) {
+    rtb_minmax1550 = cbf_P.minmax1550_LowerSat;
   }
 
-  // End of Saturate: '<Root>/min//max 1.5//-3.0'
+  // End of Saturate: '<Root>/min//max 1.5//-5.0'
 
   // BusAssignment: '<Root>/Bus Assignment1'
-  rtb_BusAssignment1.Data = rtb_minmax1530;
+  rtb_BusAssignment1.Data = rtb_minmax1550;
 
   // Outputs for Atomic SubSystem: '<Root>/Publish1'
   // MATLABSystem: '<S4>/SinkBlock'
@@ -192,9 +192,9 @@ void cbf_step(void)
   //   SignalConversion generated from: '<Root>/Bus Selector7'
 
   cbf_B.BusAssignment2 = cbf_P.Constant_Value;
-  cbf_B.BusAssignment2.Linear.X = cbf_B.In1_o.Data;
+  cbf_B.BusAssignment2.Linear.X = cbf_B.In1.Data;
   cbf_B.BusAssignment2.Linear.Y = rtb_cmd_accel;
-  cbf_B.BusAssignment2.Linear.Z = rtb_minmax1530;
+  cbf_B.BusAssignment2.Linear.Z = rtb_minmax1550;
   cbf_B.BusAssignment2.Angular.Y = b_value;
   cbf_B.BusAssignment2.Angular.Z = b_value_1;
 
@@ -266,7 +266,7 @@ void cbf_initialize(void)
     // SystemInitialize for SignalConversion generated from: '<S15>/In1' incorporates:
     //   Outport: '<S15>/Out1'
 
-    cbf_B.In1_o = cbf_P.Out1_Y0_a;
+    cbf_B.In1 = cbf_P.Out1_Y0_a;
 
     // End of SystemInitialize for SubSystem: '<S9>/Enabled Subsystem'
 
@@ -312,7 +312,7 @@ void cbf_initialize(void)
     // SystemInitialize for SignalConversion generated from: '<S14>/In1' incorporates:
     //   Outport: '<S14>/Out1'
 
-    cbf_B.In1 = cbf_P.Out1_Y0;
+    cbf_B.In1_p = cbf_P.Out1_Y0_p;
 
     // End of SystemInitialize for SubSystem: '<S8>/Enabled Subsystem'
 

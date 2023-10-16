@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.3
+// Model version                  : 7.4
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Thu Oct 12 14:21:34 2023
+// C/C++ source code generated on : Mon Oct 16 11:14:16 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -38,40 +38,6 @@ P_cbf_T cbf_P = {
   },
 
   // Computed Parameter: Out1_Y0
-  //  Referenced by: '<S14>/Out1'
-
-  {
-    {
-      0.0,                             // X
-      0.0,                             // Y
-      0.0                              // Z
-    },                                 // Linear
-
-    {
-      0.0,                             // X
-      0.0,                             // Y
-      0.0                              // Z
-    }                                  // Angular
-  },
-
-  // Computed Parameter: Constant_Value_p
-  //  Referenced by: '<S8>/Constant'
-
-  {
-    {
-      0.0,                             // X
-      0.0,                             // Y
-      0.0                              // Z
-    },                                 // Linear
-
-    {
-      0.0,                             // X
-      0.0,                             // Y
-      0.0                              // Z
-    }                                  // Angular
-  },
-
-  // Computed Parameter: Out1_Y0_o
   //  Referenced by: '<S16>/Out1'
 
   {
@@ -120,6 +86,20 @@ P_cbf_T cbf_P = {
     0.0                                // Data
   },
 
+  // Computed Parameter: Out1_Y0_p
+  //  Referenced by: '<S14>/Out1'
+
+  {
+    0.0                                // Data
+  },
+
+  // Computed Parameter: Constant_Value_p
+  //  Referenced by: '<S8>/Constant'
+
+  {
+    0.0                                // Data
+  },
+
   // Computed Parameter: Out1_Y0_a
   //  Referenced by: '<S15>/Out1'
 
@@ -145,12 +125,12 @@ P_cbf_T cbf_P = {
   0.5,
 
   // Expression: 1.5
-  //  Referenced by: '<Root>/min//max 1.5//-3.0'
+  //  Referenced by: '<Root>/min//max 1.5//-5.0'
 
   1.5,
 
   // Expression: -5.0
-  //  Referenced by: '<Root>/min//max 1.5//-3.0'
+  //  Referenced by: '<Root>/min//max 1.5//-5.0'
 
   -5.0,
 

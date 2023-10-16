@@ -15,7 +15,7 @@ extern SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cb
 extern SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_527;
 
 // For Block cbf/Subscribe4
-extern SimulinkSubscriber<geometry_msgs::Twist, SL_Bus_cbf_geometry_msgs_Twist> Sub_cbf_430;
+extern SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_430;
 
 // For Block cbf/Subscribe6
 extern SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_476;
