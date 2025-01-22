@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:01 2022
+// Model version                  : 8.6
+// Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+// C/C++ source code generated on : Wed Jan 22 13:43:09 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -20,9 +20,11 @@
 #define RTW_HEADER_rt_nonfinite_h_
 #include <stddef.h>
 #include "rtwtypes.h"
+#define NOT_USING_NONFINITE_LITERALS   1
 #ifdef __cplusplus
 
-extern "C" {
+extern "C"
+{
 
 #endif
 
@@ -61,6 +63,7 @@ extern "C" {
 #ifdef __cplusplus
 
 }                                      // extern "C"
+
 #endif
 #endif                                 // RTW_HEADER_rt_nonfinite_h_
 

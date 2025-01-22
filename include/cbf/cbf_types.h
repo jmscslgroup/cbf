@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:01 2022
+// Model version                  : 8.6
+// Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+// C/C++ source code generated on : Wed Jan 22 13:43:09 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -19,8 +19,6 @@
 #ifndef RTW_HEADER_cbf_types_h_
 #define RTW_HEADER_cbf_types_h_
 #include "rtwtypes.h"
-
-// Model Code Variants
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_cbf_std_msgs_Float64_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_cbf_std_msgs_Float64_
 
@@ -71,28 +69,48 @@ struct SL_Bus_cbf_std_msgs_Bool
 
 #endif
 
-#ifndef struct_f_robotics_slcore_internal_bl_T
-#define struct_f_robotics_slcore_internal_bl_T
+#ifndef struct_h_dsp_internal_SlidingWindowA_T
+#define struct_h_dsp_internal_SlidingWindowA_T
 
-struct f_robotics_slcore_internal_bl_T
+struct h_dsp_internal_SlidingWindowA_T
 {
-  int32_T __dummy;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T pCumSum;
+  real_T pCumSumRev[3];
+  real_T pCumRevIndex;
+  real_T pModValueRev;
 };
 
-#endif                                // struct_f_robotics_slcore_internal_bl_T
+#endif                                // struct_h_dsp_internal_SlidingWindowA_T
 
-#ifndef struct_ros_slros_internal_block_GetP_T
-#define struct_ros_slros_internal_block_GetP_T
+#ifndef struct_cell_wrap_cbf_T
+#define struct_cell_wrap_cbf_T
 
-struct ros_slros_internal_block_GetP_T
+struct cell_wrap_cbf_T
+{
+  uint32_T f1[8];
+};
+
+#endif                                 // struct_cell_wrap_cbf_T
+
+#ifndef struct_dsp_simulink_MovingAverage_cb_T
+#define struct_dsp_simulink_MovingAverage_cb_T
+
+struct dsp_simulink_MovingAverage_cb_T
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
-  f_robotics_slcore_internal_bl_T SampleTimeHandler;
+  boolean_T TunablePropsChanged;
+  cell_wrap_cbf_T inputVarSize;
+  h_dsp_internal_SlidingWindowA_T *pStatistic;
+  int32_T NumChannels;
+  int32_T FrameLength;
+  h_dsp_internal_SlidingWindowA_T _pobj0;
 };
 
-#endif                                // struct_ros_slros_internal_block_GetP_T
+#endif                                // struct_dsp_simulink_MovingAverage_cb_T
 
 #ifndef struct_ros_slroscpp_internal_block_P_T
 #define struct_ros_slroscpp_internal_block_P_T
@@ -117,6 +135,29 @@ struct ros_slroscpp_internal_block_S_T
 };
 
 #endif                                // struct_ros_slroscpp_internal_block_S_T
+
+#ifndef struct_f_robotics_slcore_internal_bl_T
+#define struct_f_robotics_slcore_internal_bl_T
+
+struct f_robotics_slcore_internal_bl_T
+{
+  int32_T __dummy;
+};
+
+#endif                                // struct_f_robotics_slcore_internal_bl_T
+
+#ifndef struct_ros_slros_internal_block_GetP_T
+#define struct_ros_slros_internal_block_GetP_T
+
+struct ros_slros_internal_block_GetP_T
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  f_robotics_slcore_internal_bl_T SampleTimeHandler;
+};
+
+#endif                                // struct_ros_slros_internal_block_GetP_T
 
 // Parameters (default storage)
 typedef struct P_cbf_T_ P_cbf_T;
