@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 8.7
+// Model version                  : 8.8
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Jan 24 11:53:59 2025
+// C/C++ source code generated on : Fri Jan 24 15:26:24 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -112,6 +112,21 @@ struct dsp_simulink_MovingAverage_cb_T
 
 #endif                                // struct_dsp_simulink_MovingAverage_cb_T
 
+#ifndef struct_h_dsp_internal_SlidingWindo_h_T
+#define struct_h_dsp_internal_SlidingWindo_h_T
+
+struct h_dsp_internal_SlidingWindo_h_T
+{
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T pCumSum;
+  real_T pCumSumRev[24];
+  real_T pCumRevIndex;
+  real_T pModValueRev;
+};
+
+#endif                                // struct_h_dsp_internal_SlidingWindo_h_T
+
 #ifndef struct_ros_slroscpp_internal_block_P_T
 #define struct_ros_slroscpp_internal_block_P_T
 
@@ -158,6 +173,24 @@ struct ros_slros_internal_block_GetP_T
 };
 
 #endif                                // struct_ros_slros_internal_block_GetP_T
+
+#ifndef struct_dsp_simulink_MovingAverage_h_T
+#define struct_dsp_simulink_MovingAverage_h_T
+
+struct dsp_simulink_MovingAverage_h_T
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  boolean_T TunablePropsChanged;
+  cell_wrap_cbf_T inputVarSize;
+  h_dsp_internal_SlidingWindo_h_T *pStatistic;
+  int32_T NumChannels;
+  int32_T FrameLength;
+  h_dsp_internal_SlidingWindo_h_T _pobj0;
+};
+
+#endif                                 // struct_dsp_simulink_MovingAverage_h_T
 
 // Parameters (default storage)
 typedef struct P_cbf_T_ P_cbf_T;
