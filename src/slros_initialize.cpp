@@ -12,6 +12,9 @@ SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_548;
 // For Block cbf/Subscribe2
 SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_549;
 
+// For Block cbf/Subscribe3
+SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_634;
+
 // For Block cbf/Subscribe6
 SimulinkSubscriber<std_msgs::Float64, SL_Bus_cbf_std_msgs_Float64> Sub_cbf_551;
 

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 8.6
+// Model version                  : 8.7
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Jan 22 13:43:09 2025
+// C/C++ source code generated on : Fri Jan 24 11:53:59 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -80,12 +80,13 @@ struct B_cbf_T {
   real_T b_value_b;
   real_T Derivative1;                  // '<Root>/Derivative1'
   real_T Derivative;                   // '<Root>/Derivative'
-  real_T u;                            // '<S14>/MATLAB Function1'
+  real_T u;                            // '<S15>/MATLAB Function1'
   real_T minmax1550;                   // '<Root>/min//max 1.5//-5.0'
-  SL_Bus_cbf_std_msgs_Float64 In1;     // '<S18>/In1'
-  SL_Bus_cbf_std_msgs_Float64 In1_g;   // '<S17>/In1'
-  SL_Bus_cbf_std_msgs_Float64 In1_m;   // '<S16>/In1'
-  SL_Bus_cbf_std_msgs_Float64 In1_j;   // '<S15>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1;     // '<S20>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1_f;   // '<S19>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1_g;   // '<S18>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1_m;   // '<S17>/In1'
+  SL_Bus_cbf_std_msgs_Float64 In1_j;   // '<S16>/In1'
   SL_Bus_cbf_std_msgs_Float64 b_varargout_2;
   SL_Bus_cbf_std_msgs_Float64 BusAssignment1;// '<Root>/Bus Assignment1'
   boolean_T b_varargout_1;
@@ -96,17 +97,18 @@ struct B_cbf_T {
 
 // Block states (default storage) for system '<Root>'
 struct DW_cbf_T {
-  ros_slros_internal_block_GetP_T obj; // '<S14>/Get Parameter7'
-  ros_slros_internal_block_GetP_T obj_l;// '<S14>/Get Parameter5'
-  ros_slros_internal_block_GetP_T obj_b;// '<S14>/Get Parameter4'
-  ros_slros_internal_block_GetP_T obj_m;// '<S14>/Get Parameter3'
-  ros_slros_internal_block_GetP_T obj_n;// '<S14>/Get Parameter2'
+  ros_slros_internal_block_GetP_T obj; // '<S15>/Get Parameter7'
+  ros_slros_internal_block_GetP_T obj_l;// '<S15>/Get Parameter5'
+  ros_slros_internal_block_GetP_T obj_b;// '<S15>/Get Parameter4'
+  ros_slros_internal_block_GetP_T obj_m;// '<S15>/Get Parameter3'
+  ros_slros_internal_block_GetP_T obj_n;// '<S15>/Get Parameter2'
   ros_slroscpp_internal_block_P_T obj_d;// '<S8>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_ni;// '<S7>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_ng;// '<S6>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_p;// '<S5>/SinkBlock'
-  ros_slroscpp_internal_block_S_T obj_bu;// '<S13>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_f;// '<S12>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_bu;// '<S14>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_f;// '<S13>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_o;// '<S12>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_j;// '<S11>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_i;// '<S10>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_c;// '<S9>/SourceBlock'
@@ -132,37 +134,43 @@ struct P_cbf_T_ {
                                                      //  Referenced by: '<S3>/Constant'
 
   SL_Bus_cbf_std_msgs_Bool Out1_Y0;    // Computed Parameter: Out1_Y0
-                                          //  Referenced by: '<S19>/Out1'
+                                          //  Referenced by: '<S21>/Out1'
 
   SL_Bus_cbf_std_msgs_Bool Constant_Value_o;// Computed Parameter: Constant_Value_o
-                                               //  Referenced by: '<S13>/Constant'
+                                               //  Referenced by: '<S14>/Constant'
 
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_e;// Computed Parameter: Constant_Value_e
                                                   //  Referenced by: '<S1>/Constant'
 
   SL_Bus_cbf_std_msgs_Float64 Out1_Y0_e;// Computed Parameter: Out1_Y0_e
-                                           //  Referenced by: '<S15>/Out1'
+                                           //  Referenced by: '<S16>/Out1'
 
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_n;// Computed Parameter: Constant_Value_n
                                                   //  Referenced by: '<S9>/Constant'
 
   SL_Bus_cbf_std_msgs_Float64 Out1_Y0_m;// Computed Parameter: Out1_Y0_m
-                                           //  Referenced by: '<S16>/Out1'
+                                           //  Referenced by: '<S17>/Out1'
 
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_j;// Computed Parameter: Constant_Value_j
                                                   //  Referenced by: '<S10>/Constant'
 
   SL_Bus_cbf_std_msgs_Float64 Out1_Y0_ea;// Computed Parameter: Out1_Y0_ea
-                                            //  Referenced by: '<S17>/Out1'
+                                            //  Referenced by: '<S18>/Out1'
 
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_f;// Computed Parameter: Constant_Value_f
                                                   //  Referenced by: '<S11>/Constant'
 
+  SL_Bus_cbf_std_msgs_Float64 Out1_Y0_c;// Computed Parameter: Out1_Y0_c
+                                           //  Referenced by: '<S19>/Out1'
+
+  SL_Bus_cbf_std_msgs_Float64 Constant_Value_ne;// Computed Parameter: Constant_Value_ne
+                                                   //  Referenced by: '<S12>/Constant'
+
   SL_Bus_cbf_std_msgs_Float64 Out1_Y0_p;// Computed Parameter: Out1_Y0_p
-                                           //  Referenced by: '<S18>/Out1'
+                                           //  Referenced by: '<S20>/Out1'
 
   SL_Bus_cbf_std_msgs_Float64 Constant_Value_h;// Computed Parameter: Constant_Value_h
-                                                  //  Referenced by: '<S12>/Constant'
+                                                  //  Referenced by: '<S13>/Constant'
 
   real_T Constant2_Value;              // Expression: 1.0
                                           //  Referenced by: '<Root>/Constant2'
@@ -311,15 +319,17 @@ extern volatile boolean_T runModel;
 //  '<S9>'   : 'cbf/Subscribe'
 //  '<S10>'  : 'cbf/Subscribe1'
 //  '<S11>'  : 'cbf/Subscribe2'
-//  '<S12>'  : 'cbf/Subscribe6'
-//  '<S13>'  : 'cbf/Subscribe7'
-//  '<S14>'  : 'cbf/cbf_filter'
-//  '<S15>'  : 'cbf/Subscribe/Enabled Subsystem'
-//  '<S16>'  : 'cbf/Subscribe1/Enabled Subsystem'
-//  '<S17>'  : 'cbf/Subscribe2/Enabled Subsystem'
-//  '<S18>'  : 'cbf/Subscribe6/Enabled Subsystem'
-//  '<S19>'  : 'cbf/Subscribe7/Enabled Subsystem'
-//  '<S20>'  : 'cbf/cbf_filter/MATLAB Function1'
+//  '<S12>'  : 'cbf/Subscribe3'
+//  '<S13>'  : 'cbf/Subscribe6'
+//  '<S14>'  : 'cbf/Subscribe7'
+//  '<S15>'  : 'cbf/cbf_filter'
+//  '<S16>'  : 'cbf/Subscribe/Enabled Subsystem'
+//  '<S17>'  : 'cbf/Subscribe1/Enabled Subsystem'
+//  '<S18>'  : 'cbf/Subscribe2/Enabled Subsystem'
+//  '<S19>'  : 'cbf/Subscribe3/Enabled Subsystem'
+//  '<S20>'  : 'cbf/Subscribe6/Enabled Subsystem'
+//  '<S21>'  : 'cbf/Subscribe7/Enabled Subsystem'
+//  '<S22>'  : 'cbf/cbf_filter/MATLAB Function1'
 
 #endif                                 // RTW_HEADER_cbf_h_
 

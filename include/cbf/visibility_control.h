@@ -28,5 +28,5 @@
   #define CBF_PUBLIC_TYPE
 #endif
 #endif  // CBF__VISIBILITY_CONTROL_H_
-// Generated 22-Jan-2025 13:43:26
+// Generated 24-Jan-2025 11:54:11
 // Copyright 2019-2020 The MathWorks, Inc.
