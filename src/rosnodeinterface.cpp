@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 8.8
+// Model version                  : 8.9
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Jan 24 15:26:30 2025
+// C/C++ source code generated on : Tue Jan 28 10:27:02 2025
 //
 
 #ifdef _MSC_VER
