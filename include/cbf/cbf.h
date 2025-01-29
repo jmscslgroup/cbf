@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 8.10
+// Model version                  : 8.11
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Tue Jan 28 16:45:02 2025
+// C/C++ source code generated on : Wed Jan 29 09:50:07 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -70,20 +70,22 @@ struct DW_MovingAverage_cbf_T {
 
 // Block signals (default storage)
 struct B_cbf_T {
-  real_T csumrev[24];
+  real_T csumrev[10];
   SL_Bus_cbf_geometry_msgs_Twist BusAssignment2;// '<Root>/Bus Assignment2'
   char_T b_zeroDelimTopic[25];
   char_T b_zeroDelimTopic_m[18];
   char_T b_zeroDelimTopic_c[17];
   char_T b_zeroDelimTopic_k[15];
   char_T b_zeroDelimTopic_cx[14];
+  real_T MovingAverage2;               // '<Root>/Moving Average2'
+  real_T cumRevIndex;
+  real_T csum;
+  real_T modValueRev;
+  real_T z;
   real_T b_value;
   real_T b_value_b;
-  real_T b_value_p;
   real_T Derivative1;                  // '<Root>/Derivative1'
-  real_T Derivative;                   // '<Root>/Derivative'
-  real_T u;                            // '<S16>/MATLAB Function1'
-  real_T minmax1550;                   // '<Root>/min//max 1.5//-5.0'
+  real_T d;
   SL_Bus_cbf_std_msgs_Float64 In1;     // '<S21>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_f;   // '<S20>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_g;   // '<S19>/In1'
@@ -93,7 +95,7 @@ struct B_cbf_T {
   SL_Bus_cbf_std_msgs_Float64 BusAssignment1;// '<Root>/Bus Assignment1'
   int32_T i;
   boolean_T b_varargout_1;
-  SL_Bus_cbf_std_msgs_Bool b_varargout_2_c;
+  SL_Bus_cbf_std_msgs_Bool b_varargout_2_p;
   B_MovingAverage_cbf_T MovingAverage1;// '<Root>/Moving Average'
   B_MovingAverage_cbf_T MovingAverage; // '<Root>/Moving Average'
 };
@@ -121,10 +123,14 @@ struct DW_cbf_T {
   real_T LastUAtTimeA;                 // '<Root>/Derivative1'
   real_T TimeStampB;                   // '<Root>/Derivative1'
   real_T LastUAtTimeB;                 // '<Root>/Derivative1'
+  real_T TimeStampA_m;                 // '<Root>/Derivative2'
+  real_T LastUAtTimeA_b;               // '<Root>/Derivative2'
+  real_T TimeStampB_k;                 // '<Root>/Derivative2'
+  real_T LastUAtTimeB_l;               // '<Root>/Derivative2'
   real_T TimeStampA_h;                 // '<Root>/Derivative'
   real_T LastUAtTimeA_k;               // '<Root>/Derivative'
   real_T TimeStampB_e;                 // '<Root>/Derivative'
-  real_T LastUAtTimeB_l;               // '<Root>/Derivative'
+  real_T LastUAtTimeB_l1;              // '<Root>/Derivative'
   boolean_T relative_distance_prev_not_empt;// '<Root>/MATLAB Function1'
   DW_MovingAverage_cbf_T MovingAverage1;// '<Root>/Moving Average'
   DW_MovingAverage_cbf_T MovingAverage;// '<Root>/Moving Average'

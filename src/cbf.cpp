@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 8.10
+// Model version                  : 8.11
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Tue Jan 28 16:45:02 2025
+// C/C++ source code generated on : Wed Jan 29 09:50:07 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -280,29 +280,232 @@ void cbf_step(void)
 
     // Derivative: '<Root>/Derivative1' incorporates:
     //   Derivative: '<Root>/Derivative'
+    //   Derivative: '<Root>/Derivative2'
 
-    cbf_B.Derivative = cbf_M->Timing.t[0];
-    if ((cbf_DW.TimeStampA >= cbf_B.Derivative) && (cbf_DW.TimeStampB >=
-         cbf_B.Derivative)) {
+    cbf_B.d = cbf_M->Timing.t[0];
+    if ((cbf_DW.TimeStampA >= cbf_B.d) && (cbf_DW.TimeStampB >= cbf_B.d)) {
       cbf_B.Derivative1 = 0.0;
     } else {
-      cbf_B.u = cbf_DW.TimeStampA;
+      cbf_B.cumRevIndex = cbf_DW.TimeStampA;
       lastU = &cbf_DW.LastUAtTimeA;
       if (cbf_DW.TimeStampA < cbf_DW.TimeStampB) {
-        if (cbf_DW.TimeStampB < cbf_B.Derivative) {
-          cbf_B.u = cbf_DW.TimeStampB;
+        if (cbf_DW.TimeStampB < cbf_B.d) {
+          cbf_B.cumRevIndex = cbf_DW.TimeStampB;
           lastU = &cbf_DW.LastUAtTimeB;
         }
-      } else if (cbf_DW.TimeStampA >= cbf_B.Derivative) {
-        cbf_B.u = cbf_DW.TimeStampB;
+      } else if (cbf_DW.TimeStampA >= cbf_B.d) {
+        cbf_B.cumRevIndex = cbf_DW.TimeStampB;
         lastU = &cbf_DW.LastUAtTimeB;
       }
 
       cbf_B.Derivative1 = (cbf_B.MovingAverage1.MovingAverage - *lastU) /
-        (cbf_B.Derivative - cbf_B.u);
+        (cbf_B.d - cbf_B.cumRevIndex);
     }
 
     // End of Derivative: '<Root>/Derivative1'
+
+    // MATLABSystem: '<Root>/Moving Average2'
+    if (cbf_DW.obj.TunablePropsChanged) {
+      cbf_DW.obj.TunablePropsChanged = false;
+    }
+
+    obj = cbf_DW.obj.pStatistic;
+    if (cbf_DW.obj.pStatistic->isInitialized != 1) {
+      cbf_DW.obj.pStatistic->isSetupComplete = false;
+      cbf_DW.obj.pStatistic->isInitialized = 1;
+      obj->pCumSum = 0.0;
+      obj->pCumRevIndex = 1.0;
+      obj->pModValueRev = 0.0;
+      obj->isSetupComplete = true;
+      obj->pCumSum = 0.0;
+      for (cbf_B.i = 0; cbf_B.i < 10; cbf_B.i++) {
+        obj->pCumSumRev[cbf_B.i] = 0.0;
+        obj->pCumSumRev[cbf_B.i] = 0.0;
+      }
+
+      obj->pCumRevIndex = 1.0;
+      obj->pModValueRev = 0.0;
+    }
+
+    cbf_B.cumRevIndex = obj->pCumRevIndex;
+    cbf_B.csum = obj->pCumSum;
+    for (cbf_B.i = 0; cbf_B.i < 10; cbf_B.i++) {
+      cbf_B.csumrev[cbf_B.i] = obj->pCumSumRev[cbf_B.i];
+    }
+
+    cbf_B.modValueRev = obj->pModValueRev;
+    cbf_B.z = 0.0;
+
+    // MATLABSystem: '<Root>/Moving Average2'
+    cbf_B.MovingAverage2 = 0.0;
+
+    // MATLABSystem: '<Root>/Moving Average2'
+    cbf_B.csum += cbf_B.In1_f.Data;
+    if (cbf_B.modValueRev == 0.0) {
+      cbf_B.z = cbf_B.csumrev[static_cast<int32_T>(cbf_B.cumRevIndex) - 1] +
+        cbf_B.csum;
+    }
+
+    cbf_B.csumrev[static_cast<int32_T>(cbf_B.cumRevIndex) - 1] =
+      cbf_B.In1_f.Data;
+    if (cbf_B.cumRevIndex != 10.0) {
+      cbf_B.cumRevIndex++;
+    } else {
+      cbf_B.cumRevIndex = 1.0;
+      cbf_B.csum = 0.0;
+      for (cbf_B.i = 8; cbf_B.i >= 0; cbf_B.i--) {
+        cbf_B.csumrev[cbf_B.i] += cbf_B.csumrev[cbf_B.i + 1];
+      }
+    }
+
+    if (cbf_B.modValueRev == 0.0) {
+      // MATLABSystem: '<Root>/Moving Average2'
+      cbf_B.MovingAverage2 = cbf_B.z / 11.0;
+    }
+
+    obj->pCumSum = cbf_B.csum;
+    for (cbf_B.i = 0; cbf_B.i < 10; cbf_B.i++) {
+      obj->pCumSumRev[cbf_B.i] = cbf_B.csumrev[cbf_B.i];
+    }
+
+    obj->pCumRevIndex = cbf_B.cumRevIndex;
+    if (cbf_B.modValueRev > 0.0) {
+      obj->pModValueRev = cbf_B.modValueRev - 1.0;
+    } else {
+      obj->pModValueRev = 0.0;
+    }
+
+    // Derivative: '<Root>/Derivative2'
+    if ((cbf_DW.TimeStampA_m >= cbf_B.d) && (cbf_DW.TimeStampB_k >= cbf_B.d)) {
+      cbf_B.cumRevIndex = 0.0;
+    } else {
+      cbf_B.cumRevIndex = cbf_DW.TimeStampA_m;
+      lastU = &cbf_DW.LastUAtTimeA_b;
+      if (cbf_DW.TimeStampA_m < cbf_DW.TimeStampB_k) {
+        if (cbf_DW.TimeStampB_k < cbf_B.d) {
+          cbf_B.cumRevIndex = cbf_DW.TimeStampB_k;
+          lastU = &cbf_DW.LastUAtTimeB_l;
+        }
+      } else if (cbf_DW.TimeStampA_m >= cbf_B.d) {
+        cbf_B.cumRevIndex = cbf_DW.TimeStampB_k;
+        lastU = &cbf_DW.LastUAtTimeB_l;
+      }
+
+      cbf_B.cumRevIndex = (cbf_B.MovingAverage2 - *lastU) / (cbf_B.d -
+        cbf_B.cumRevIndex);
+    }
+
+    // MATLABSystem: '<S16>/Get Parameter2'
+    ParamGet_cbf_567.get_parameter(&cbf_B.csum);
+
+    // MATLABSystem: '<S16>/Get Parameter3'
+    ParamGet_cbf_568.get_parameter(&cbf_B.modValueRev);
+
+    // MATLABSystem: '<S16>/Get Parameter4'
+    ParamGet_cbf_569.get_parameter(&cbf_B.z);
+
+    // MATLABSystem: '<S16>/Get Parameter5'
+    ParamGet_cbf_570.get_parameter(&cbf_B.b_value);
+
+    // MATLABSystem: '<S16>/Get Parameter7'
+    ParamGet_cbf_595.get_parameter(&cbf_B.b_value_b);
+
+    // MATLAB Function: '<S16>/MATLAB Function1' incorporates:
+    //   MATLABSystem: '<S16>/Get Parameter2'
+    //   MATLABSystem: '<S16>/Get Parameter3'
+    //   MATLABSystem: '<S16>/Get Parameter4'
+    //   MATLABSystem: '<S16>/Get Parameter5'
+    //   MATLABSystem: '<S16>/Get Parameter7'
+    //
+    cbf_B.csum = (((cbf_B.csum / cbf_B.b_value_b * cbf_B.Derivative1 +
+                    cbf_B.cumRevIndex) + (cbf_B.In1_f.Data - cbf_B.csum *
+      cbf_B.Derivative1) * (cbf_B.z + cbf_B.b_value)) + ((cbf_B.In1_j.Data -
+      cbf_B.csum * cbf_B.In1_m.Data) - cbf_B.modValueRev) * (cbf_B.z *
+      cbf_B.b_value)) * (cbf_B.b_value_b / cbf_B.csum);
+
+    // Switch: '<Root>/Switch' incorporates:
+    //   Constant: '<Root>/Constant2'
+    //   SignalConversion generated from: '<Root>/Bus Selector7'
+
+    if (cbf_P.Constant2_Value > cbf_P.Switch_Threshold) {
+      // MinMax: '<Root>/MinMax' incorporates:
+      //   SignalConversion generated from: '<Root>/Bus Selector7'
+
+      if ((cbf_B.csum <= cbf_B.In1.Data) || rtIsNaN(cbf_B.In1.Data)) {
+        cbf_B.modValueRev = cbf_B.csum;
+      } else {
+        cbf_B.modValueRev = cbf_B.In1.Data;
+      }
+
+      // End of MinMax: '<Root>/MinMax'
+    } else {
+      cbf_B.modValueRev = cbf_B.In1.Data;
+    }
+
+    // End of Switch: '<Root>/Switch'
+
+    // Saturate: '<Root>/min//max 1.5//-5.0'
+    if (cbf_B.modValueRev > cbf_P.minmax1550_UpperSat) {
+      cbf_B.modValueRev = cbf_P.minmax1550_UpperSat;
+    } else if (cbf_B.modValueRev < cbf_P.minmax1550_LowerSat) {
+      cbf_B.modValueRev = cbf_P.minmax1550_LowerSat;
+    }
+
+    // End of Saturate: '<Root>/min//max 1.5//-5.0'
+
+    // BusAssignment: '<Root>/Bus Assignment1'
+    cbf_B.BusAssignment1.Data = cbf_B.modValueRev;
+
+    // Outputs for Atomic SubSystem: '<Root>/Publish1'
+    // MATLABSystem: '<S5>/SinkBlock'
+    Pub_cbf_544.publish(&cbf_B.BusAssignment1);
+
+    // End of Outputs for SubSystem: '<Root>/Publish1'
+
+    // BusAssignment: '<Root>/Bus Assignment2' incorporates:
+    //   Constant: '<Root>/Constant'
+    //   Constant: '<Root>/Constant3'
+    //   Constant: '<S2>/Constant'
+    //   SignalConversion generated from: '<Root>/Bus Selector7'
+
+    cbf_B.BusAssignment2 = cbf_P.Constant_Value;
+    cbf_B.BusAssignment2.Linear.X = cbf_B.In1.Data;
+    cbf_B.BusAssignment2.Linear.Y = cbf_B.csum;
+    cbf_B.BusAssignment2.Linear.Z = cbf_B.modValueRev;
+    cbf_B.BusAssignment2.Angular.Y = cbf_P.Constant_Value_jt;
+    cbf_B.BusAssignment2.Angular.Z = cbf_P.Constant3_Value;
+
+    // Outputs for Atomic SubSystem: '<Root>/Publish2'
+    // MATLABSystem: '<S6>/SinkBlock'
+    Pub_cbf_545.publish(&cbf_B.BusAssignment2);
+
+    // End of Outputs for SubSystem: '<Root>/Publish2'
+
+    // BusAssignment: '<Root>/Bus Assignment5' incorporates:
+    //   Constant: '<S3>/Constant'
+
+    cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
+    cbf_B.BusAssignment2.Linear.X = cbf_B.cumRevIndex;
+    cbf_B.BusAssignment2.Linear.Y = cbf_B.MovingAverage2;
+
+    // Outputs for Atomic SubSystem: '<Root>/Publish4'
+    // MATLABSystem: '<S8>/SinkBlock'
+    Pub_cbf_642.publish(&cbf_B.BusAssignment2);
+
+    // End of Outputs for SubSystem: '<Root>/Publish4'
+
+    // BusAssignment: '<Root>/Bus Assignment4' incorporates:
+    //   Constant: '<S3>/Constant'
+
+    cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
+    cbf_B.BusAssignment2.Linear.X = cbf_B.Derivative1;
+    cbf_B.BusAssignment2.Linear.Y = cbf_B.MovingAverage1.MovingAverage;
+
+    // Outputs for Atomic SubSystem: '<Root>/Publish5'
+    // MATLABSystem: '<S9>/SinkBlock'
+    Pub_cbf_614.publish(&cbf_B.BusAssignment2);
+
+    // End of Outputs for SubSystem: '<Root>/Publish5'
 
     // Outputs for Atomic SubSystem: '<Root>/Subscribe2'
     // MATLABSystem: '<S12>/SourceBlock'
@@ -324,118 +527,30 @@ void cbf_step(void)
                       &cbf_DW.MovingAverage);
 
     // Derivative: '<Root>/Derivative'
-    if ((cbf_DW.TimeStampA_h >= cbf_B.Derivative) && (cbf_DW.TimeStampB_e >=
-         cbf_B.Derivative)) {
-      cbf_B.Derivative = 0.0;
+    if ((cbf_DW.TimeStampA_h >= cbf_B.d) && (cbf_DW.TimeStampB_e >= cbf_B.d)) {
+      cbf_B.modValueRev = 0.0;
     } else {
-      cbf_B.u = cbf_DW.TimeStampA_h;
+      cbf_B.cumRevIndex = cbf_DW.TimeStampA_h;
       lastU = &cbf_DW.LastUAtTimeA_k;
       if (cbf_DW.TimeStampA_h < cbf_DW.TimeStampB_e) {
-        if (cbf_DW.TimeStampB_e < cbf_B.Derivative) {
-          cbf_B.u = cbf_DW.TimeStampB_e;
-          lastU = &cbf_DW.LastUAtTimeB_l;
+        if (cbf_DW.TimeStampB_e < cbf_B.d) {
+          cbf_B.cumRevIndex = cbf_DW.TimeStampB_e;
+          lastU = &cbf_DW.LastUAtTimeB_l1;
         }
-      } else if (cbf_DW.TimeStampA_h >= cbf_B.Derivative) {
-        cbf_B.u = cbf_DW.TimeStampB_e;
-        lastU = &cbf_DW.LastUAtTimeB_l;
+      } else if (cbf_DW.TimeStampA_h >= cbf_B.d) {
+        cbf_B.cumRevIndex = cbf_DW.TimeStampB_e;
+        lastU = &cbf_DW.LastUAtTimeB_l1;
       }
 
-      cbf_B.Derivative = (cbf_B.MovingAverage.MovingAverage - *lastU) /
-        (cbf_B.Derivative - cbf_B.u);
+      cbf_B.modValueRev = (cbf_B.MovingAverage.MovingAverage - *lastU) /
+        (cbf_B.d - cbf_B.cumRevIndex);
     }
-
-    // MATLABSystem: '<S16>/Get Parameter2'
-    ParamGet_cbf_567.get_parameter(&cbf_B.u);
-
-    // MATLABSystem: '<S16>/Get Parameter3'
-    ParamGet_cbf_568.get_parameter(&cbf_B.minmax1550);
-
-    // MATLABSystem: '<S16>/Get Parameter4'
-    ParamGet_cbf_569.get_parameter(&cbf_B.b_value);
-
-    // MATLABSystem: '<S16>/Get Parameter5'
-    ParamGet_cbf_570.get_parameter(&cbf_B.b_value_b);
-
-    // MATLABSystem: '<S16>/Get Parameter7'
-    ParamGet_cbf_595.get_parameter(&cbf_B.b_value_p);
-
-    // MATLAB Function: '<S16>/MATLAB Function1' incorporates:
-    //   MATLABSystem: '<S16>/Get Parameter2'
-    //   MATLABSystem: '<S16>/Get Parameter3'
-    //   MATLABSystem: '<S16>/Get Parameter4'
-    //   MATLABSystem: '<S16>/Get Parameter5'
-    //   MATLABSystem: '<S16>/Get Parameter7'
-    //
-    cbf_B.u = (((cbf_B.u / cbf_B.b_value_p * cbf_B.Derivative1 +
-                 cbf_B.Derivative) + (cbf_B.In1_f.Data - cbf_B.u *
-      cbf_B.Derivative1) * (cbf_B.b_value + cbf_B.b_value_b)) +
-               ((cbf_B.In1_j.Data - cbf_B.u * cbf_B.In1_m.Data) -
-                cbf_B.minmax1550) * (cbf_B.b_value * cbf_B.b_value_b)) *
-      (cbf_B.b_value_p / cbf_B.u);
-
-    // Switch: '<Root>/Switch' incorporates:
-    //   Constant: '<Root>/Constant2'
-    //   SignalConversion generated from: '<Root>/Bus Selector7'
-
-    if (cbf_P.Constant2_Value > cbf_P.Switch_Threshold) {
-      // MinMax: '<Root>/MinMax' incorporates:
-      //   SignalConversion generated from: '<Root>/Bus Selector7'
-
-      if ((cbf_B.u <= cbf_B.In1.Data) || rtIsNaN(cbf_B.In1.Data)) {
-        cbf_B.minmax1550 = cbf_B.u;
-      } else {
-        cbf_B.minmax1550 = cbf_B.In1.Data;
-      }
-
-      // End of MinMax: '<Root>/MinMax'
-    } else {
-      cbf_B.minmax1550 = cbf_B.In1.Data;
-    }
-
-    // End of Switch: '<Root>/Switch'
-
-    // Saturate: '<Root>/min//max 1.5//-5.0'
-    if (cbf_B.minmax1550 > cbf_P.minmax1550_UpperSat) {
-      cbf_B.minmax1550 = cbf_P.minmax1550_UpperSat;
-    } else if (cbf_B.minmax1550 < cbf_P.minmax1550_LowerSat) {
-      cbf_B.minmax1550 = cbf_P.minmax1550_LowerSat;
-    }
-
-    // End of Saturate: '<Root>/min//max 1.5//-5.0'
-
-    // BusAssignment: '<Root>/Bus Assignment1'
-    cbf_B.BusAssignment1.Data = cbf_B.minmax1550;
-
-    // Outputs for Atomic SubSystem: '<Root>/Publish1'
-    // MATLABSystem: '<S5>/SinkBlock'
-    Pub_cbf_544.publish(&cbf_B.BusAssignment1);
-
-    // End of Outputs for SubSystem: '<Root>/Publish1'
-
-    // BusAssignment: '<Root>/Bus Assignment2' incorporates:
-    //   Constant: '<Root>/Constant'
-    //   Constant: '<Root>/Constant3'
-    //   Constant: '<S2>/Constant'
-    //   SignalConversion generated from: '<Root>/Bus Selector7'
-
-    cbf_B.BusAssignment2 = cbf_P.Constant_Value;
-    cbf_B.BusAssignment2.Linear.X = cbf_B.In1.Data;
-    cbf_B.BusAssignment2.Linear.Y = cbf_B.u;
-    cbf_B.BusAssignment2.Linear.Z = cbf_B.minmax1550;
-    cbf_B.BusAssignment2.Angular.Y = cbf_P.Constant_Value_jt;
-    cbf_B.BusAssignment2.Angular.Z = cbf_P.Constant3_Value;
-
-    // Outputs for Atomic SubSystem: '<Root>/Publish2'
-    // MATLABSystem: '<S6>/SinkBlock'
-    Pub_cbf_545.publish(&cbf_B.BusAssignment2);
-
-    // End of Outputs for SubSystem: '<Root>/Publish2'
 
     // BusAssignment: '<Root>/Bus Assignment3' incorporates:
     //   Constant: '<S3>/Constant'
 
     cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
-    cbf_B.BusAssignment2.Linear.X = cbf_B.Derivative;
+    cbf_B.BusAssignment2.Linear.X = cbf_B.modValueRev;
     cbf_B.BusAssignment2.Linear.Y = cbf_B.MovingAverage.MovingAverage;
 
     // Outputs for Atomic SubSystem: '<Root>/Publish3'
@@ -444,104 +559,12 @@ void cbf_step(void)
 
     // End of Outputs for SubSystem: '<Root>/Publish3'
 
-    // BusAssignment: '<Root>/Bus Assignment4' incorporates:
-    //   Constant: '<S3>/Constant'
-
-    cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
-    cbf_B.BusAssignment2.Linear.X = cbf_B.Derivative1;
-    cbf_B.BusAssignment2.Linear.Y = cbf_B.MovingAverage1.MovingAverage;
-
-    // Outputs for Atomic SubSystem: '<Root>/Publish5'
-    // MATLABSystem: '<S9>/SinkBlock'
-    Pub_cbf_614.publish(&cbf_B.BusAssignment2);
-
-    // End of Outputs for SubSystem: '<Root>/Publish5'
-
-    // MATLABSystem: '<Root>/Moving Average2'
-    if (cbf_DW.obj.TunablePropsChanged) {
-      cbf_DW.obj.TunablePropsChanged = false;
-    }
-
-    obj = cbf_DW.obj.pStatistic;
-    if (cbf_DW.obj.pStatistic->isInitialized != 1) {
-      cbf_DW.obj.pStatistic->isSetupComplete = false;
-      cbf_DW.obj.pStatistic->isInitialized = 1;
-      obj->pCumSum = 0.0;
-      obj->pCumRevIndex = 1.0;
-      obj->pModValueRev = 0.0;
-      obj->isSetupComplete = true;
-      obj->pCumSum = 0.0;
-      for (cbf_B.i = 0; cbf_B.i < 24; cbf_B.i++) {
-        obj->pCumSumRev[cbf_B.i] = 0.0;
-        obj->pCumSumRev[cbf_B.i] = 0.0;
-      }
-
-      obj->pCumRevIndex = 1.0;
-      obj->pModValueRev = 0.0;
-    }
-
-    cbf_B.Derivative1 = obj->pCumRevIndex;
-    cbf_B.Derivative = obj->pCumSum;
-    for (cbf_B.i = 0; cbf_B.i < 24; cbf_B.i++) {
-      cbf_B.csumrev[cbf_B.i] = obj->pCumSumRev[cbf_B.i];
-    }
-
-    cbf_B.u = obj->pModValueRev;
-    cbf_B.minmax1550 = 0.0;
-    cbf_B.b_value = 0.0;
-    cbf_B.Derivative += cbf_B.In1_f.Data;
-    if (cbf_B.u == 0.0) {
-      cbf_B.minmax1550 = cbf_B.csumrev[static_cast<int32_T>(cbf_B.Derivative1) -
-        1] + cbf_B.Derivative;
-    }
-
-    cbf_B.csumrev[static_cast<int32_T>(cbf_B.Derivative1) - 1] =
-      cbf_B.In1_f.Data;
-    if (cbf_B.Derivative1 != 24.0) {
-      cbf_B.Derivative1++;
-    } else {
-      cbf_B.Derivative1 = 1.0;
-      cbf_B.Derivative = 0.0;
-      for (cbf_B.i = 22; cbf_B.i >= 0; cbf_B.i--) {
-        cbf_B.csumrev[cbf_B.i] += cbf_B.csumrev[cbf_B.i + 1];
-      }
-    }
-
-    if (cbf_B.u == 0.0) {
-      cbf_B.b_value = cbf_B.minmax1550 / 25.0;
-    }
-
-    obj->pCumSum = cbf_B.Derivative;
-    for (cbf_B.i = 0; cbf_B.i < 24; cbf_B.i++) {
-      obj->pCumSumRev[cbf_B.i] = cbf_B.csumrev[cbf_B.i];
-    }
-
-    obj->pCumRevIndex = cbf_B.Derivative1;
-    if (cbf_B.u > 0.0) {
-      obj->pModValueRev = cbf_B.u - 1.0;
-    } else {
-      obj->pModValueRev = 0.0;
-    }
-
-    // BusAssignment: '<Root>/Bus Assignment5' incorporates:
-    //   Constant: '<S3>/Constant'
-    //   MATLABSystem: '<Root>/Moving Average2'
-
-    cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
-    cbf_B.BusAssignment2.Linear.X = cbf_B.b_value;
-
-    // Outputs for Atomic SubSystem: '<Root>/Publish4'
-    // MATLABSystem: '<S8>/SinkBlock'
-    Pub_cbf_642.publish(&cbf_B.BusAssignment2);
-
-    // End of Outputs for SubSystem: '<Root>/Publish4'
-
     // MATLAB Function: '<Root>/MATLAB Function1'
     cbf_DW.relative_distance_prev_not_empt = true;
 
     // Outputs for Atomic SubSystem: '<Root>/Subscribe7'
     // MATLABSystem: '<S15>/SourceBlock'
-    Sub_cbf_552.getLatestMessage(&cbf_B.b_varargout_2_c);
+    Sub_cbf_552.getLatestMessage(&cbf_B.b_varargout_2_p);
 
     // End of Outputs for SubSystem: '<Root>/Subscribe7'
   }
@@ -568,19 +591,38 @@ void cbf_step(void)
 
     // End of Update for Derivative: '<Root>/Derivative1'
 
+    // Update for Derivative: '<Root>/Derivative2'
+    if (cbf_DW.TimeStampA_m == (rtInf)) {
+      cbf_DW.TimeStampA_m = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeA_b;
+    } else if (cbf_DW.TimeStampB_k == (rtInf)) {
+      cbf_DW.TimeStampB_k = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_l;
+    } else if (cbf_DW.TimeStampA_m < cbf_DW.TimeStampB_k) {
+      cbf_DW.TimeStampA_m = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeA_b;
+    } else {
+      cbf_DW.TimeStampB_k = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_l;
+    }
+
+    *lastU = cbf_B.MovingAverage2;
+
+    // End of Update for Derivative: '<Root>/Derivative2'
+
     // Update for Derivative: '<Root>/Derivative'
     if (cbf_DW.TimeStampA_h == (rtInf)) {
       cbf_DW.TimeStampA_h = cbf_M->Timing.t[0];
       lastU = &cbf_DW.LastUAtTimeA_k;
     } else if (cbf_DW.TimeStampB_e == (rtInf)) {
       cbf_DW.TimeStampB_e = cbf_M->Timing.t[0];
-      lastU = &cbf_DW.LastUAtTimeB_l;
+      lastU = &cbf_DW.LastUAtTimeB_l1;
     } else if (cbf_DW.TimeStampA_h < cbf_DW.TimeStampB_e) {
       cbf_DW.TimeStampA_h = cbf_M->Timing.t[0];
       lastU = &cbf_DW.LastUAtTimeA_k;
     } else {
       cbf_DW.TimeStampB_e = cbf_M->Timing.t[0];
-      lastU = &cbf_DW.LastUAtTimeB_l;
+      lastU = &cbf_DW.LastUAtTimeB_l1;
     }
 
     *lastU = cbf_B.MovingAverage.MovingAverage;
@@ -643,12 +685,12 @@ void cbf_initialize(void)
     static const char_T b_zeroDelimTopic_2[10] = "lead_dist";
     static const char_T b_zeroDelimTopic_3[8] = "rel_vel";
     static const char_T b_zeroDelimTopic_4[17] = "/car/state/vel_x";
-    static const char_T b_zeroDelimTopic_5[18] = "radar_rv_estimate";
-    static const char_T b_zeroDelimTopic_6[10] = "cmd_accel";
-    static const char_T b_zeroDelimTopic_7[15] = "/cbf/cbf_debug";
-    static const char_T b_zeroDelimTopic_8[17] = "radar_processing";
-    static const char_T b_zeroDelimTopic_9[17] = "accel_processing";
-    static const char_T b_zeroDelimTopic_a[18] = "rel_vel_smoothing";
+    static const char_T b_zeroDelimTopic_5[10] = "cmd_accel";
+    static const char_T b_zeroDelimTopic_6[15] = "/cbf/cbf_debug";
+    static const char_T b_zeroDelimTopic_7[18] = "rel_vel_smoothing";
+    static const char_T b_zeroDelimTopic_8[17] = "accel_processing";
+    static const char_T b_zeroDelimTopic_9[18] = "radar_rv_estimate";
+    static const char_T b_zeroDelimTopic_a[17] = "radar_processing";
     static const char_T b_zeroDelimTopic_b[25] = "/car/hud/mini_car_enable";
     static const char_T b_zeroDelimName_2[8] = "timegap";
     static const char_T b_zeroDelimName_3[6] = "s_min";
@@ -656,6 +698,10 @@ void cbf_initialize(void)
     // InitializeConditions for Derivative: '<Root>/Derivative1'
     cbf_DW.TimeStampA = (rtInf);
     cbf_DW.TimeStampB = (rtInf);
+
+    // InitializeConditions for Derivative: '<Root>/Derivative2'
+    cbf_DW.TimeStampA_m = (rtInf);
+    cbf_DW.TimeStampB_k = (rtInf);
 
     // InitializeConditions for Derivative: '<Root>/Derivative'
     cbf_DW.TimeStampA_h = (rtInf);
@@ -749,34 +795,12 @@ void cbf_initialize(void)
     // End of Start for MATLABSystem: '<S11>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe1'
 
-    // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe2'
-    // SystemInitialize for Enabled SubSystem: '<S12>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S19>/In1' incorporates:
-    //   Outport: '<S19>/Out1'
-
-    cbf_B.In1_g = cbf_P.Out1_Y0_ea;
-
-    // End of SystemInitialize for SubSystem: '<S12>/Enabled Subsystem'
-
-    // Start for MATLABSystem: '<S12>/SourceBlock'
-    cbf_DW.obj_j.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_j.isInitialized = 1;
-    for (i = 0; i < 18; i++) {
-      cbf_B.b_zeroDelimTopic_m[i] = b_zeroDelimTopic_5[i];
-    }
-
-    Sub_cbf_549.createSubscriber(&cbf_B.b_zeroDelimTopic_m[0], 1);
-    cbf_DW.obj_j.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S12>/SourceBlock'
-    // End of SystemInitialize for SubSystem: '<Root>/Subscribe2'
-
     // SystemInitialize for Atomic SubSystem: '<Root>/Publish1'
     // Start for MATLABSystem: '<S5>/SinkBlock'
     cbf_DW.obj_p.matlabCodegenIsDeleted = false;
     cbf_DW.obj_p.isInitialized = 1;
     for (i = 0; i < 10; i++) {
-      b_zeroDelimTopic[i] = b_zeroDelimTopic_6[i];
+      b_zeroDelimTopic[i] = b_zeroDelimTopic_5[i];
     }
 
     Pub_cbf_544.createPublisher(&b_zeroDelimTopic[0], 1);
@@ -790,7 +814,7 @@ void cbf_initialize(void)
     cbf_DW.obj_ng.matlabCodegenIsDeleted = false;
     cbf_DW.obj_ng.isInitialized = 1;
     for (i = 0; i < 15; i++) {
-      cbf_B.b_zeroDelimTopic_k[i] = b_zeroDelimTopic_7[i];
+      cbf_B.b_zeroDelimTopic_k[i] = b_zeroDelimTopic_6[i];
     }
 
     Pub_cbf_545.createPublisher(&cbf_B.b_zeroDelimTopic_k[0], 1);
@@ -799,26 +823,26 @@ void cbf_initialize(void)
     // End of Start for MATLABSystem: '<S6>/SinkBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Publish2'
 
-    // SystemInitialize for Atomic SubSystem: '<Root>/Publish3'
-    // Start for MATLABSystem: '<S7>/SinkBlock'
-    cbf_DW.obj_ni.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_ni.isInitialized = 1;
-    for (i = 0; i < 17; i++) {
-      cbf_B.b_zeroDelimTopic_c[i] = b_zeroDelimTopic_8[i];
+    // SystemInitialize for Atomic SubSystem: '<Root>/Publish4'
+    // Start for MATLABSystem: '<S8>/SinkBlock'
+    cbf_DW.obj_h.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_h.isInitialized = 1;
+    for (i = 0; i < 18; i++) {
+      cbf_B.b_zeroDelimTopic_m[i] = b_zeroDelimTopic_7[i];
     }
 
-    Pub_cbf_612.createPublisher(&cbf_B.b_zeroDelimTopic_c[0], 1);
-    cbf_DW.obj_ni.isSetupComplete = true;
+    Pub_cbf_642.createPublisher(&cbf_B.b_zeroDelimTopic_m[0], 1);
+    cbf_DW.obj_h.isSetupComplete = true;
 
-    // End of Start for MATLABSystem: '<S7>/SinkBlock'
-    // End of SystemInitialize for SubSystem: '<Root>/Publish3'
+    // End of Start for MATLABSystem: '<S8>/SinkBlock'
+    // End of SystemInitialize for SubSystem: '<Root>/Publish4'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Publish5'
     // Start for MATLABSystem: '<S9>/SinkBlock'
     cbf_DW.obj_d.matlabCodegenIsDeleted = false;
     cbf_DW.obj_d.isInitialized = 1;
     for (i = 0; i < 17; i++) {
-      cbf_B.b_zeroDelimTopic_c[i] = b_zeroDelimTopic_9[i];
+      cbf_B.b_zeroDelimTopic_c[i] = b_zeroDelimTopic_8[i];
     }
 
     Pub_cbf_614.createPublisher(&cbf_B.b_zeroDelimTopic_c[0], 1);
@@ -827,19 +851,41 @@ void cbf_initialize(void)
     // End of Start for MATLABSystem: '<S9>/SinkBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Publish5'
 
-    // SystemInitialize for Atomic SubSystem: '<Root>/Publish4'
-    // Start for MATLABSystem: '<S8>/SinkBlock'
-    cbf_DW.obj_h.matlabCodegenIsDeleted = false;
-    cbf_DW.obj_h.isInitialized = 1;
+    // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe2'
+    // SystemInitialize for Enabled SubSystem: '<S12>/Enabled Subsystem'
+    // SystemInitialize for SignalConversion generated from: '<S19>/In1' incorporates:
+    //   Outport: '<S19>/Out1'
+
+    cbf_B.In1_g = cbf_P.Out1_Y0_ea;
+
+    // End of SystemInitialize for SubSystem: '<S12>/Enabled Subsystem'
+
+    // Start for MATLABSystem: '<S12>/SourceBlock'
+    cbf_DW.obj_j.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_j.isInitialized = 1;
     for (i = 0; i < 18; i++) {
-      cbf_B.b_zeroDelimTopic_m[i] = b_zeroDelimTopic_a[i];
+      cbf_B.b_zeroDelimTopic_m[i] = b_zeroDelimTopic_9[i];
     }
 
-    Pub_cbf_642.createPublisher(&cbf_B.b_zeroDelimTopic_m[0], 1);
-    cbf_DW.obj_h.isSetupComplete = true;
+    Sub_cbf_549.createSubscriber(&cbf_B.b_zeroDelimTopic_m[0], 1);
+    cbf_DW.obj_j.isSetupComplete = true;
 
-    // End of Start for MATLABSystem: '<S8>/SinkBlock'
-    // End of SystemInitialize for SubSystem: '<Root>/Publish4'
+    // End of Start for MATLABSystem: '<S12>/SourceBlock'
+    // End of SystemInitialize for SubSystem: '<Root>/Subscribe2'
+
+    // SystemInitialize for Atomic SubSystem: '<Root>/Publish3'
+    // Start for MATLABSystem: '<S7>/SinkBlock'
+    cbf_DW.obj_ni.matlabCodegenIsDeleted = false;
+    cbf_DW.obj_ni.isInitialized = 1;
+    for (i = 0; i < 17; i++) {
+      cbf_B.b_zeroDelimTopic_c[i] = b_zeroDelimTopic_a[i];
+    }
+
+    Pub_cbf_612.createPublisher(&cbf_B.b_zeroDelimTopic_c[0], 1);
+    cbf_DW.obj_ni.isSetupComplete = true;
+
+    // End of Start for MATLABSystem: '<S7>/SinkBlock'
+    // End of SystemInitialize for SubSystem: '<Root>/Publish3'
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe7'
     // Start for MATLABSystem: '<S15>/SourceBlock'
@@ -855,7 +901,27 @@ void cbf_initialize(void)
     // End of Start for MATLABSystem: '<S15>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe7'
     cbf_MovingAverage_Init(&cbf_DW.MovingAverage1);
-    cbf_MovingAverage_Init(&cbf_DW.MovingAverage);
+
+    // Start for MATLABSystem: '<Root>/Moving Average2'
+    cbf_DW.obj.isInitialized = 0;
+    cbf_DW.obj.NumChannels = -1;
+    cbf_DW.obj.FrameLength = -1;
+    cbf_DW.obj.matlabCodegenIsDeleted = false;
+    cbf_SystemCore_setup_h(&cbf_DW.obj);
+
+    // InitializeConditions for MATLABSystem: '<Root>/Moving Average2'
+    obj = cbf_DW.obj.pStatistic;
+    if (obj->isInitialized == 1) {
+      obj->pCumSum = 0.0;
+      for (i = 0; i < 10; i++) {
+        obj->pCumSumRev[i] = 0.0;
+      }
+
+      obj->pCumRevIndex = 1.0;
+      obj->pModValueRev = 0.0;
+    }
+
+    // End of InitializeConditions for MATLABSystem: '<Root>/Moving Average2'
 
     // Start for MATLABSystem: '<S16>/Get Parameter2'
     cbf_DW.obj_n.matlabCodegenIsDeleted = false;
@@ -918,27 +984,7 @@ void cbf_initialize(void)
     ParamGet_cbf_595.initialize_error_codes(0, 1, 2, 3);
     ParamGet_cbf_595.set_initial_value(1.5);
     cbf_DW.obj_l.isSetupComplete = true;
-
-    // Start for MATLABSystem: '<Root>/Moving Average2'
-    cbf_DW.obj.isInitialized = 0;
-    cbf_DW.obj.NumChannels = -1;
-    cbf_DW.obj.FrameLength = -1;
-    cbf_DW.obj.matlabCodegenIsDeleted = false;
-    cbf_SystemCore_setup_h(&cbf_DW.obj);
-
-    // InitializeConditions for MATLABSystem: '<Root>/Moving Average2'
-    obj = cbf_DW.obj.pStatistic;
-    if (obj->isInitialized == 1) {
-      obj->pCumSum = 0.0;
-      for (i = 0; i < 24; i++) {
-        obj->pCumSumRev[i] = 0.0;
-      }
-
-      obj->pCumRevIndex = 1.0;
-      obj->pModValueRev = 0.0;
-    }
-
-    // End of InitializeConditions for MATLABSystem: '<Root>/Moving Average2'
+    cbf_MovingAverage_Init(&cbf_DW.MovingAverage);
   }
 }
 
@@ -984,15 +1030,21 @@ void cbf_terminate(void)
   // End of Terminate for SubSystem: '<Root>/Subscribe1'
   cbf_MovingAverage_Term(&cbf_DW.MovingAverage1);
 
-  // Terminate for Atomic SubSystem: '<Root>/Subscribe2'
-  // Terminate for MATLABSystem: '<S12>/SourceBlock'
-  if (!cbf_DW.obj_j.matlabCodegenIsDeleted) {
-    cbf_DW.obj_j.matlabCodegenIsDeleted = true;
+  // Terminate for MATLABSystem: '<Root>/Moving Average2'
+  if (!cbf_DW.obj.matlabCodegenIsDeleted) {
+    cbf_DW.obj.matlabCodegenIsDeleted = true;
+    if ((cbf_DW.obj.isInitialized == 1) && cbf_DW.obj.isSetupComplete) {
+      obj = cbf_DW.obj.pStatistic;
+      if (obj->isInitialized == 1) {
+        obj->isInitialized = 2;
+      }
+
+      cbf_DW.obj.NumChannels = -1;
+      cbf_DW.obj.FrameLength = -1;
+    }
   }
 
-  // End of Terminate for MATLABSystem: '<S12>/SourceBlock'
-  // End of Terminate for SubSystem: '<Root>/Subscribe2'
-  cbf_MovingAverage_Term(&cbf_DW.MovingAverage);
+  // End of Terminate for MATLABSystem: '<Root>/Moving Average2'
 
   // Terminate for MATLABSystem: '<S16>/Get Parameter2'
   if (!cbf_DW.obj_n.matlabCodegenIsDeleted) {
@@ -1047,14 +1099,14 @@ void cbf_terminate(void)
   // End of Terminate for MATLABSystem: '<S6>/SinkBlock'
   // End of Terminate for SubSystem: '<Root>/Publish2'
 
-  // Terminate for Atomic SubSystem: '<Root>/Publish3'
-  // Terminate for MATLABSystem: '<S7>/SinkBlock'
-  if (!cbf_DW.obj_ni.matlabCodegenIsDeleted) {
-    cbf_DW.obj_ni.matlabCodegenIsDeleted = true;
+  // Terminate for Atomic SubSystem: '<Root>/Publish4'
+  // Terminate for MATLABSystem: '<S8>/SinkBlock'
+  if (!cbf_DW.obj_h.matlabCodegenIsDeleted) {
+    cbf_DW.obj_h.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S7>/SinkBlock'
-  // End of Terminate for SubSystem: '<Root>/Publish3'
+  // End of Terminate for MATLABSystem: '<S8>/SinkBlock'
+  // End of Terminate for SubSystem: '<Root>/Publish4'
 
   // Terminate for Atomic SubSystem: '<Root>/Publish5'
   // Terminate for MATLABSystem: '<S9>/SinkBlock'
@@ -1065,30 +1117,24 @@ void cbf_terminate(void)
   // End of Terminate for MATLABSystem: '<S9>/SinkBlock'
   // End of Terminate for SubSystem: '<Root>/Publish5'
 
-  // Terminate for MATLABSystem: '<Root>/Moving Average2'
-  if (!cbf_DW.obj.matlabCodegenIsDeleted) {
-    cbf_DW.obj.matlabCodegenIsDeleted = true;
-    if ((cbf_DW.obj.isInitialized == 1) && cbf_DW.obj.isSetupComplete) {
-      obj = cbf_DW.obj.pStatistic;
-      if (obj->isInitialized == 1) {
-        obj->isInitialized = 2;
-      }
-
-      cbf_DW.obj.NumChannels = -1;
-      cbf_DW.obj.FrameLength = -1;
-    }
+  // Terminate for Atomic SubSystem: '<Root>/Subscribe2'
+  // Terminate for MATLABSystem: '<S12>/SourceBlock'
+  if (!cbf_DW.obj_j.matlabCodegenIsDeleted) {
+    cbf_DW.obj_j.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<Root>/Moving Average2'
+  // End of Terminate for MATLABSystem: '<S12>/SourceBlock'
+  // End of Terminate for SubSystem: '<Root>/Subscribe2'
+  cbf_MovingAverage_Term(&cbf_DW.MovingAverage);
 
-  // Terminate for Atomic SubSystem: '<Root>/Publish4'
-  // Terminate for MATLABSystem: '<S8>/SinkBlock'
-  if (!cbf_DW.obj_h.matlabCodegenIsDeleted) {
-    cbf_DW.obj_h.matlabCodegenIsDeleted = true;
+  // Terminate for Atomic SubSystem: '<Root>/Publish3'
+  // Terminate for MATLABSystem: '<S7>/SinkBlock'
+  if (!cbf_DW.obj_ni.matlabCodegenIsDeleted) {
+    cbf_DW.obj_ni.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S8>/SinkBlock'
-  // End of Terminate for SubSystem: '<Root>/Publish4'
+  // End of Terminate for MATLABSystem: '<S7>/SinkBlock'
+  // End of Terminate for SubSystem: '<Root>/Publish3'
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe7'
   // Terminate for MATLABSystem: '<S15>/SourceBlock'

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 8.10
+// Model version                  : 8.11
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Tue Jan 28 16:45:02 2025
+// C/C++ source code generated on : Wed Jan 29 09:50:07 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -120,7 +120,7 @@ struct h_dsp_internal_SlidingWindo_h_T
   int32_T isInitialized;
   boolean_T isSetupComplete;
   real_T pCumSum;
-  real_T pCumSumRev[24];
+  real_T pCumSumRev[10];
   real_T pCumRevIndex;
   real_T pModValueRev;
 };
