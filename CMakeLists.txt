@@ -33,6 +33,7 @@ catkin_package(
   geometry_msgs
   roscpp
   std_msgs
+  INCLUDE_DIRS include
 )
 ###########
 ## Build ##
@@ -118,7 +119,13 @@ add_custom_command(
                    TARGET cbf
                    POST_BUILD
                    COMMAND ${CMAKE_COMMAND}
+                   ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/codegen/exe/cbf/${file_i}
+				   )
+add_custom_command(
+                   TARGET cbf
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND}
                    ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/cbf_ert_rtw/${file_i}
 				   )
 endforeach(file_i)
-# Generated on Mon Jun 20 15:39:08 2022
+# Generated on Wed Jan 29 15:20:49 2025
