@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.4
-// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Mon Oct 16 11:14:16 2023
+// Model version                  : 8.0
+// Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+// C/C++ source code generated on : Sat Feb  1 14:51:52 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -47,6 +47,8 @@ struct B_cbf_T {
   SL_Bus_cbf_geometry_msgs_Twist BusAssignment2;// '<Root>/Bus Assignment2'
   char_T b_zeroDelimTopic[25];
   char_T b_zeroDelimTopic_m[17];
+  real_T timegap_accel;
+  real_T b_value;
   SL_Bus_cbf_std_msgs_Float64 In1;     // '<S15>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_p;   // '<S14>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_f;   // '<S13>/In1'
@@ -55,8 +57,7 @@ struct B_cbf_T {
 
 // Block states (default storage) for system '<Root>'
 struct DW_cbf_T {
-  ros_slros_internal_block_GetP_T obj; // '<S11>/Get Parameter6'
-  ros_slros_internal_block_GetP_T obj_e;// '<S11>/Get Parameter5'
+  ros_slros_internal_block_GetP_T obj; // '<S11>/Get Parameter5'
   ros_slros_internal_block_GetP_T obj_k;// '<S11>/Get Parameter4'
   ros_slros_internal_block_GetP_T obj_i;// '<S11>/Get Parameter3'
   ros_slros_internal_block_GetP_T obj_p;// '<S11>/Get Parameter2'

@@ -93,7 +93,7 @@ target_compile_options(cbf PUBLIC
   -DSTACK_SIZE=64
   -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__
   -DRT=RT
-    -fpermissive  >
+     -fpermissive  >
   )
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -128,4 +128,4 @@ add_custom_command(
                    ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/cbf_ert_rtw/${file_i}
 				   )
 endforeach(file_i)
-# Generated on Mon Oct 16 11:14:26 2023
+# Generated on Sat Feb 01 14:51:59 2025

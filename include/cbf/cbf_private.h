@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 7.4
-// Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Mon Oct 16 11:14:16 2023
+// Model version                  : 8.0
+// Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+// C/C++ source code generated on : Sat Feb  1 14:51:52 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -20,6 +20,8 @@
 #define RTW_HEADER_cbf_private_h_
 #include "rtwtypes.h"
 #include "cbf_types.h"
+#include "rtw_continuous.h"
+#include "rtw_solver.h"
 #endif                                 // RTW_HEADER_cbf_private_h_
 
 //

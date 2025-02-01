@@ -44,9 +44,6 @@ extern SimulinkParameterGetter<real64_T, double> ParamGet_cbf_450;
 // For Block cbf/cbf_filter/Get Parameter5
 extern SimulinkParameterGetter<real64_T, double> ParamGet_cbf_463;
 
-// For Block cbf/cbf_filter/Get Parameter6
-extern SimulinkParameterGetter<real64_T, double> ParamGet_cbf_465;
-
 void slros_node_init(int argc, char** argv);
 
 #endif
