@@ -9,7 +9,7 @@
 //
 // Model version                  : 8.11
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Jan 29 09:50:07 2025
+// C/C++ source code generated on : Sat Feb  1 14:25:42 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -70,8 +70,8 @@ struct DW_MovingAverage_cbf_T {
 
 // Block signals (default storage)
 struct B_cbf_T {
-  real_T csumrev[10];
   SL_Bus_cbf_geometry_msgs_Twist BusAssignment2;// '<Root>/Bus Assignment2'
+  real_T csumrev[6];
   char_T b_zeroDelimTopic[25];
   char_T b_zeroDelimTopic_m[18];
   char_T b_zeroDelimTopic_c[17];
@@ -85,6 +85,7 @@ struct B_cbf_T {
   real_T b_value;
   real_T b_value_b;
   real_T Derivative1;                  // '<Root>/Derivative1'
+  real_T Derivative;                   // '<Root>/Derivative'
   real_T d;
   SL_Bus_cbf_std_msgs_Float64 In1;     // '<S21>/In1'
   SL_Bus_cbf_std_msgs_Float64 In1_f;   // '<S20>/In1'
@@ -123,14 +124,18 @@ struct DW_cbf_T {
   real_T LastUAtTimeA;                 // '<Root>/Derivative1'
   real_T TimeStampB;                   // '<Root>/Derivative1'
   real_T LastUAtTimeB;                 // '<Root>/Derivative1'
-  real_T TimeStampA_m;                 // '<Root>/Derivative2'
+  real_T TimeStampA_b;                 // '<Root>/Derivative2'
   real_T LastUAtTimeA_b;               // '<Root>/Derivative2'
-  real_T TimeStampB_k;                 // '<Root>/Derivative2'
-  real_T LastUAtTimeB_l;               // '<Root>/Derivative2'
+  real_T TimeStampB_e;                 // '<Root>/Derivative2'
+  real_T LastUAtTimeB_i;               // '<Root>/Derivative2'
+  real_T TimeStampA_d;                 // '<Root>/Derivative3'
+  real_T LastUAtTimeA_bs;              // '<Root>/Derivative3'
+  real_T TimeStampB_b;                 // '<Root>/Derivative3'
+  real_T LastUAtTimeB_a;               // '<Root>/Derivative3'
   real_T TimeStampA_h;                 // '<Root>/Derivative'
   real_T LastUAtTimeA_k;               // '<Root>/Derivative'
-  real_T TimeStampB_e;                 // '<Root>/Derivative'
-  real_T LastUAtTimeB_l1;              // '<Root>/Derivative'
+  real_T TimeStampB_el;                // '<Root>/Derivative'
+  real_T LastUAtTimeB_l;               // '<Root>/Derivative'
   boolean_T relative_distance_prev_not_empt;// '<Root>/MATLAB Function1'
   DW_MovingAverage_cbf_T MovingAverage1;// '<Root>/Moving Average'
   DW_MovingAverage_cbf_T MovingAverage;// '<Root>/Moving Average'
@@ -194,12 +199,6 @@ struct P_cbf_T_ {
 
   real_T minmax1550_LowerSat;          // Expression: -5.0
                                           //  Referenced by: '<Root>/min//max 1.5//-5.0'
-
-  real_T Constant_Value_jt;            // Expression: 0
-                                          //  Referenced by: '<Root>/Constant'
-
-  real_T Constant3_Value;              // Expression: 0
-                                          //  Referenced by: '<Root>/Constant3'
 
   real_T Constant1_Value;              // Expression: 5
                                           //  Referenced by: '<Root>/Constant1'

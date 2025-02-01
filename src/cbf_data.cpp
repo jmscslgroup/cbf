@@ -9,7 +9,7 @@
 //
 // Model version                  : 8.11
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Jan 29 09:50:07 2025
+// C/C++ source code generated on : Sat Feb  1 14:25:42 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -164,16 +164,6 @@ P_cbf_T cbf_P = {
   //  Referenced by: '<Root>/min//max 1.5//-5.0'
 
   -5.0,
-
-  // Expression: 0
-  //  Referenced by: '<Root>/Constant'
-
-  0.0,
-
-  // Expression: 0
-  //  Referenced by: '<Root>/Constant3'
-
-  0.0,
 
   // Expression: 5
   //  Referenced by: '<Root>/Constant1'

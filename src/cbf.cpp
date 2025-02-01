@@ -9,7 +9,7 @@
 //
 // Model version                  : 8.11
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Jan 29 09:50:07 2025
+// C/C++ source code generated on : Sat Feb  1 14:25:42 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -281,25 +281,26 @@ void cbf_step(void)
     // Derivative: '<Root>/Derivative1' incorporates:
     //   Derivative: '<Root>/Derivative'
     //   Derivative: '<Root>/Derivative2'
+    //   Derivative: '<Root>/Derivative3'
 
     cbf_B.d = cbf_M->Timing.t[0];
     if ((cbf_DW.TimeStampA >= cbf_B.d) && (cbf_DW.TimeStampB >= cbf_B.d)) {
       cbf_B.Derivative1 = 0.0;
     } else {
-      cbf_B.cumRevIndex = cbf_DW.TimeStampA;
+      cbf_B.csum = cbf_DW.TimeStampA;
       lastU = &cbf_DW.LastUAtTimeA;
       if (cbf_DW.TimeStampA < cbf_DW.TimeStampB) {
         if (cbf_DW.TimeStampB < cbf_B.d) {
-          cbf_B.cumRevIndex = cbf_DW.TimeStampB;
+          cbf_B.csum = cbf_DW.TimeStampB;
           lastU = &cbf_DW.LastUAtTimeB;
         }
       } else if (cbf_DW.TimeStampA >= cbf_B.d) {
-        cbf_B.cumRevIndex = cbf_DW.TimeStampB;
+        cbf_B.csum = cbf_DW.TimeStampB;
         lastU = &cbf_DW.LastUAtTimeB;
       }
 
       cbf_B.Derivative1 = (cbf_B.MovingAverage1.MovingAverage - *lastU) /
-        (cbf_B.d - cbf_B.cumRevIndex);
+        (cbf_B.d - cbf_B.csum);
     }
 
     // End of Derivative: '<Root>/Derivative1'
@@ -318,7 +319,7 @@ void cbf_step(void)
       obj->pModValueRev = 0.0;
       obj->isSetupComplete = true;
       obj->pCumSum = 0.0;
-      for (cbf_B.i = 0; cbf_B.i < 10; cbf_B.i++) {
+      for (cbf_B.i = 0; cbf_B.i < 6; cbf_B.i++) {
         obj->pCumSumRev[cbf_B.i] = 0.0;
         obj->pCumSumRev[cbf_B.i] = 0.0;
       }
@@ -329,7 +330,7 @@ void cbf_step(void)
 
     cbf_B.cumRevIndex = obj->pCumRevIndex;
     cbf_B.csum = obj->pCumSum;
-    for (cbf_B.i = 0; cbf_B.i < 10; cbf_B.i++) {
+    for (cbf_B.i = 0; cbf_B.i < 6; cbf_B.i++) {
       cbf_B.csumrev[cbf_B.i] = obj->pCumSumRev[cbf_B.i];
     }
 
@@ -348,23 +349,23 @@ void cbf_step(void)
 
     cbf_B.csumrev[static_cast<int32_T>(cbf_B.cumRevIndex) - 1] =
       cbf_B.In1_f.Data;
-    if (cbf_B.cumRevIndex != 10.0) {
+    if (cbf_B.cumRevIndex != 6.0) {
       cbf_B.cumRevIndex++;
     } else {
       cbf_B.cumRevIndex = 1.0;
       cbf_B.csum = 0.0;
-      for (cbf_B.i = 8; cbf_B.i >= 0; cbf_B.i--) {
+      for (cbf_B.i = 4; cbf_B.i >= 0; cbf_B.i--) {
         cbf_B.csumrev[cbf_B.i] += cbf_B.csumrev[cbf_B.i + 1];
       }
     }
 
     if (cbf_B.modValueRev == 0.0) {
       // MATLABSystem: '<Root>/Moving Average2'
-      cbf_B.MovingAverage2 = cbf_B.z / 11.0;
+      cbf_B.MovingAverage2 = cbf_B.z / 7.0;
     }
 
     obj->pCumSum = cbf_B.csum;
-    for (cbf_B.i = 0; cbf_B.i < 10; cbf_B.i++) {
+    for (cbf_B.i = 0; cbf_B.i < 6; cbf_B.i++) {
       obj->pCumSumRev[cbf_B.i] = cbf_B.csumrev[cbf_B.i];
     }
 
@@ -376,39 +377,39 @@ void cbf_step(void)
     }
 
     // Derivative: '<Root>/Derivative2'
-    if ((cbf_DW.TimeStampA_m >= cbf_B.d) && (cbf_DW.TimeStampB_k >= cbf_B.d)) {
+    if ((cbf_DW.TimeStampA_b >= cbf_B.d) && (cbf_DW.TimeStampB_e >= cbf_B.d)) {
       cbf_B.cumRevIndex = 0.0;
     } else {
-      cbf_B.cumRevIndex = cbf_DW.TimeStampA_m;
+      cbf_B.csum = cbf_DW.TimeStampA_b;
       lastU = &cbf_DW.LastUAtTimeA_b;
-      if (cbf_DW.TimeStampA_m < cbf_DW.TimeStampB_k) {
-        if (cbf_DW.TimeStampB_k < cbf_B.d) {
-          cbf_B.cumRevIndex = cbf_DW.TimeStampB_k;
-          lastU = &cbf_DW.LastUAtTimeB_l;
+      if (cbf_DW.TimeStampA_b < cbf_DW.TimeStampB_e) {
+        if (cbf_DW.TimeStampB_e < cbf_B.d) {
+          cbf_B.csum = cbf_DW.TimeStampB_e;
+          lastU = &cbf_DW.LastUAtTimeB_i;
         }
-      } else if (cbf_DW.TimeStampA_m >= cbf_B.d) {
-        cbf_B.cumRevIndex = cbf_DW.TimeStampB_k;
-        lastU = &cbf_DW.LastUAtTimeB_l;
+      } else if (cbf_DW.TimeStampA_b >= cbf_B.d) {
+        cbf_B.csum = cbf_DW.TimeStampB_e;
+        lastU = &cbf_DW.LastUAtTimeB_i;
       }
 
       cbf_B.cumRevIndex = (cbf_B.MovingAverage2 - *lastU) / (cbf_B.d -
-        cbf_B.cumRevIndex);
+        cbf_B.csum);
     }
 
     // MATLABSystem: '<S16>/Get Parameter2'
-    ParamGet_cbf_567.get_parameter(&cbf_B.csum);
+    ParamGet_cbf_567.get_parameter(&cbf_B.z);
 
     // MATLABSystem: '<S16>/Get Parameter3'
-    ParamGet_cbf_568.get_parameter(&cbf_B.modValueRev);
+    ParamGet_cbf_568.get_parameter(&cbf_B.b_value);
 
     // MATLABSystem: '<S16>/Get Parameter4'
-    ParamGet_cbf_569.get_parameter(&cbf_B.z);
+    ParamGet_cbf_569.get_parameter(&cbf_B.Derivative);
 
     // MATLABSystem: '<S16>/Get Parameter5'
-    ParamGet_cbf_570.get_parameter(&cbf_B.b_value);
+    ParamGet_cbf_570.get_parameter(&cbf_B.b_value_b);
 
     // MATLABSystem: '<S16>/Get Parameter7'
-    ParamGet_cbf_595.get_parameter(&cbf_B.b_value_b);
+    ParamGet_cbf_595.get_parameter(&cbf_B.csum);
 
     // MATLAB Function: '<S16>/MATLAB Function1' incorporates:
     //   MATLABSystem: '<S16>/Get Parameter2'
@@ -417,11 +418,12 @@ void cbf_step(void)
     //   MATLABSystem: '<S16>/Get Parameter5'
     //   MATLABSystem: '<S16>/Get Parameter7'
     //
-    cbf_B.csum = (((cbf_B.csum / cbf_B.b_value_b * cbf_B.Derivative1 +
-                    cbf_B.cumRevIndex) + (cbf_B.In1_f.Data - cbf_B.csum *
-      cbf_B.Derivative1) * (cbf_B.z + cbf_B.b_value)) + ((cbf_B.In1_j.Data -
-      cbf_B.csum * cbf_B.In1_m.Data) - cbf_B.modValueRev) * (cbf_B.z *
-      cbf_B.b_value)) * (cbf_B.b_value_b / cbf_B.csum);
+    cbf_B.modValueRev = (cbf_B.In1_f.Data - cbf_B.z * cbf_B.Derivative1) *
+      (cbf_B.Derivative + cbf_B.b_value_b);
+    cbf_B.b_value = ((cbf_B.In1_j.Data - cbf_B.z * cbf_B.In1_m.Data) -
+                     cbf_B.b_value) * (cbf_B.Derivative * cbf_B.b_value_b);
+    cbf_B.z = (((cbf_B.z / cbf_B.csum * cbf_B.Derivative1 + cbf_B.cumRevIndex) +
+                cbf_B.modValueRev) + cbf_B.b_value) * (cbf_B.csum / cbf_B.z);
 
     // Switch: '<Root>/Switch' incorporates:
     //   Constant: '<Root>/Constant2'
@@ -429,32 +431,33 @@ void cbf_step(void)
 
     if (cbf_P.Constant2_Value > cbf_P.Switch_Threshold) {
       // MinMax: '<Root>/MinMax' incorporates:
+      //   MATLAB Function: '<S16>/MATLAB Function1'
       //   SignalConversion generated from: '<Root>/Bus Selector7'
 
-      if ((cbf_B.csum <= cbf_B.In1.Data) || rtIsNaN(cbf_B.In1.Data)) {
-        cbf_B.modValueRev = cbf_B.csum;
+      if ((cbf_B.z <= cbf_B.In1.Data) || rtIsNaN(cbf_B.In1.Data)) {
+        cbf_B.Derivative = cbf_B.z;
       } else {
-        cbf_B.modValueRev = cbf_B.In1.Data;
+        cbf_B.Derivative = cbf_B.In1.Data;
       }
 
       // End of MinMax: '<Root>/MinMax'
     } else {
-      cbf_B.modValueRev = cbf_B.In1.Data;
+      cbf_B.Derivative = cbf_B.In1.Data;
     }
 
     // End of Switch: '<Root>/Switch'
 
     // Saturate: '<Root>/min//max 1.5//-5.0'
-    if (cbf_B.modValueRev > cbf_P.minmax1550_UpperSat) {
-      cbf_B.modValueRev = cbf_P.minmax1550_UpperSat;
-    } else if (cbf_B.modValueRev < cbf_P.minmax1550_LowerSat) {
-      cbf_B.modValueRev = cbf_P.minmax1550_LowerSat;
+    if (cbf_B.Derivative > cbf_P.minmax1550_UpperSat) {
+      cbf_B.Derivative = cbf_P.minmax1550_UpperSat;
+    } else if (cbf_B.Derivative < cbf_P.minmax1550_LowerSat) {
+      cbf_B.Derivative = cbf_P.minmax1550_LowerSat;
     }
 
     // End of Saturate: '<Root>/min//max 1.5//-5.0'
 
     // BusAssignment: '<Root>/Bus Assignment1'
-    cbf_B.BusAssignment1.Data = cbf_B.modValueRev;
+    cbf_B.BusAssignment1.Data = cbf_B.Derivative;
 
     // Outputs for Atomic SubSystem: '<Root>/Publish1'
     // MATLABSystem: '<S5>/SinkBlock'
@@ -463,17 +466,17 @@ void cbf_step(void)
     // End of Outputs for SubSystem: '<Root>/Publish1'
 
     // BusAssignment: '<Root>/Bus Assignment2' incorporates:
-    //   Constant: '<Root>/Constant'
-    //   Constant: '<Root>/Constant3'
     //   Constant: '<S2>/Constant'
+    //   MATLAB Function: '<S16>/MATLAB Function1'
+    //   MATLABSystem: '<S16>/Get Parameter7'
     //   SignalConversion generated from: '<Root>/Bus Selector7'
-
+    //
     cbf_B.BusAssignment2 = cbf_P.Constant_Value;
     cbf_B.BusAssignment2.Linear.X = cbf_B.In1.Data;
-    cbf_B.BusAssignment2.Linear.Y = cbf_B.csum;
-    cbf_B.BusAssignment2.Linear.Z = cbf_B.modValueRev;
-    cbf_B.BusAssignment2.Angular.Y = cbf_P.Constant_Value_jt;
-    cbf_B.BusAssignment2.Angular.Z = cbf_P.Constant3_Value;
+    cbf_B.BusAssignment2.Linear.Y = cbf_B.z;
+    cbf_B.BusAssignment2.Linear.Z = cbf_B.Derivative;
+    cbf_B.BusAssignment2.Angular.Y = ((cbf_B.cumRevIndex - 1.0 / cbf_B.csum *
+      (cbf_B.z - cbf_B.Derivative1)) + cbf_B.modValueRev) + cbf_B.b_value;
 
     // Outputs for Atomic SubSystem: '<Root>/Publish2'
     // MATLABSystem: '<S6>/SinkBlock'
@@ -481,12 +484,32 @@ void cbf_step(void)
 
     // End of Outputs for SubSystem: '<Root>/Publish2'
 
-    // BusAssignment: '<Root>/Bus Assignment5' incorporates:
+    // Derivative: '<Root>/Derivative3'
+    if ((cbf_DW.TimeStampA_d >= cbf_B.d) && (cbf_DW.TimeStampB_b >= cbf_B.d)) {
+      cbf_B.Derivative = 0.0;
+    } else {
+      cbf_B.csum = cbf_DW.TimeStampA_d;
+      lastU = &cbf_DW.LastUAtTimeA_bs;
+      if (cbf_DW.TimeStampA_d < cbf_DW.TimeStampB_b) {
+        if (cbf_DW.TimeStampB_b < cbf_B.d) {
+          cbf_B.csum = cbf_DW.TimeStampB_b;
+          lastU = &cbf_DW.LastUAtTimeB_a;
+        }
+      } else if (cbf_DW.TimeStampA_d >= cbf_B.d) {
+        cbf_B.csum = cbf_DW.TimeStampB_b;
+        lastU = &cbf_DW.LastUAtTimeB_a;
+      }
+
+      cbf_B.Derivative = (cbf_B.In1_f.Data - *lastU) / (cbf_B.d - cbf_B.csum);
+    }
+
+    // BusAssignment: '<Root>/Bus Assignment6' incorporates:
     //   Constant: '<S3>/Constant'
 
     cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
-    cbf_B.BusAssignment2.Linear.X = cbf_B.cumRevIndex;
-    cbf_B.BusAssignment2.Linear.Y = cbf_B.MovingAverage2;
+    cbf_B.BusAssignment2.Linear.X = cbf_B.MovingAverage2;
+    cbf_B.BusAssignment2.Linear.Y = cbf_B.cumRevIndex;
+    cbf_B.BusAssignment2.Linear.Z = cbf_B.Derivative;
 
     // Outputs for Atomic SubSystem: '<Root>/Publish4'
     // MATLABSystem: '<S8>/SinkBlock'
@@ -527,30 +550,30 @@ void cbf_step(void)
                       &cbf_DW.MovingAverage);
 
     // Derivative: '<Root>/Derivative'
-    if ((cbf_DW.TimeStampA_h >= cbf_B.d) && (cbf_DW.TimeStampB_e >= cbf_B.d)) {
-      cbf_B.modValueRev = 0.0;
+    if ((cbf_DW.TimeStampA_h >= cbf_B.d) && (cbf_DW.TimeStampB_el >= cbf_B.d)) {
+      cbf_B.Derivative = 0.0;
     } else {
-      cbf_B.cumRevIndex = cbf_DW.TimeStampA_h;
+      cbf_B.csum = cbf_DW.TimeStampA_h;
       lastU = &cbf_DW.LastUAtTimeA_k;
-      if (cbf_DW.TimeStampA_h < cbf_DW.TimeStampB_e) {
-        if (cbf_DW.TimeStampB_e < cbf_B.d) {
-          cbf_B.cumRevIndex = cbf_DW.TimeStampB_e;
-          lastU = &cbf_DW.LastUAtTimeB_l1;
+      if (cbf_DW.TimeStampA_h < cbf_DW.TimeStampB_el) {
+        if (cbf_DW.TimeStampB_el < cbf_B.d) {
+          cbf_B.csum = cbf_DW.TimeStampB_el;
+          lastU = &cbf_DW.LastUAtTimeB_l;
         }
       } else if (cbf_DW.TimeStampA_h >= cbf_B.d) {
-        cbf_B.cumRevIndex = cbf_DW.TimeStampB_e;
-        lastU = &cbf_DW.LastUAtTimeB_l1;
+        cbf_B.csum = cbf_DW.TimeStampB_el;
+        lastU = &cbf_DW.LastUAtTimeB_l;
       }
 
-      cbf_B.modValueRev = (cbf_B.MovingAverage.MovingAverage - *lastU) /
-        (cbf_B.d - cbf_B.cumRevIndex);
+      cbf_B.Derivative = (cbf_B.MovingAverage.MovingAverage - *lastU) / (cbf_B.d
+        - cbf_B.csum);
     }
 
     // BusAssignment: '<Root>/Bus Assignment3' incorporates:
     //   Constant: '<S3>/Constant'
 
     cbf_B.BusAssignment2 = cbf_P.Constant_Value_i;
-    cbf_B.BusAssignment2.Linear.X = cbf_B.modValueRev;
+    cbf_B.BusAssignment2.Linear.X = cbf_B.Derivative;
     cbf_B.BusAssignment2.Linear.Y = cbf_B.MovingAverage.MovingAverage;
 
     // Outputs for Atomic SubSystem: '<Root>/Publish3'
@@ -592,37 +615,56 @@ void cbf_step(void)
     // End of Update for Derivative: '<Root>/Derivative1'
 
     // Update for Derivative: '<Root>/Derivative2'
-    if (cbf_DW.TimeStampA_m == (rtInf)) {
-      cbf_DW.TimeStampA_m = cbf_M->Timing.t[0];
+    if (cbf_DW.TimeStampA_b == (rtInf)) {
+      cbf_DW.TimeStampA_b = cbf_M->Timing.t[0];
       lastU = &cbf_DW.LastUAtTimeA_b;
-    } else if (cbf_DW.TimeStampB_k == (rtInf)) {
-      cbf_DW.TimeStampB_k = cbf_M->Timing.t[0];
-      lastU = &cbf_DW.LastUAtTimeB_l;
-    } else if (cbf_DW.TimeStampA_m < cbf_DW.TimeStampB_k) {
-      cbf_DW.TimeStampA_m = cbf_M->Timing.t[0];
+    } else if (cbf_DW.TimeStampB_e == (rtInf)) {
+      cbf_DW.TimeStampB_e = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_i;
+    } else if (cbf_DW.TimeStampA_b < cbf_DW.TimeStampB_e) {
+      cbf_DW.TimeStampA_b = cbf_M->Timing.t[0];
       lastU = &cbf_DW.LastUAtTimeA_b;
     } else {
-      cbf_DW.TimeStampB_k = cbf_M->Timing.t[0];
-      lastU = &cbf_DW.LastUAtTimeB_l;
+      cbf_DW.TimeStampB_e = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_i;
     }
 
     *lastU = cbf_B.MovingAverage2;
 
     // End of Update for Derivative: '<Root>/Derivative2'
 
+    // Update for Derivative: '<Root>/Derivative3'
+    if (cbf_DW.TimeStampA_d == (rtInf)) {
+      cbf_DW.TimeStampA_d = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeA_bs;
+    } else if (cbf_DW.TimeStampB_b == (rtInf)) {
+      cbf_DW.TimeStampB_b = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_a;
+    } else if (cbf_DW.TimeStampA_d < cbf_DW.TimeStampB_b) {
+      cbf_DW.TimeStampA_d = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeA_bs;
+    } else {
+      cbf_DW.TimeStampB_b = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_a;
+    }
+
+    *lastU = cbf_B.In1_f.Data;
+
+    // End of Update for Derivative: '<Root>/Derivative3'
+
     // Update for Derivative: '<Root>/Derivative'
     if (cbf_DW.TimeStampA_h == (rtInf)) {
       cbf_DW.TimeStampA_h = cbf_M->Timing.t[0];
       lastU = &cbf_DW.LastUAtTimeA_k;
-    } else if (cbf_DW.TimeStampB_e == (rtInf)) {
-      cbf_DW.TimeStampB_e = cbf_M->Timing.t[0];
-      lastU = &cbf_DW.LastUAtTimeB_l1;
-    } else if (cbf_DW.TimeStampA_h < cbf_DW.TimeStampB_e) {
+    } else if (cbf_DW.TimeStampB_el == (rtInf)) {
+      cbf_DW.TimeStampB_el = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_l;
+    } else if (cbf_DW.TimeStampA_h < cbf_DW.TimeStampB_el) {
       cbf_DW.TimeStampA_h = cbf_M->Timing.t[0];
       lastU = &cbf_DW.LastUAtTimeA_k;
     } else {
-      cbf_DW.TimeStampB_e = cbf_M->Timing.t[0];
-      lastU = &cbf_DW.LastUAtTimeB_l1;
+      cbf_DW.TimeStampB_el = cbf_M->Timing.t[0];
+      lastU = &cbf_DW.LastUAtTimeB_l;
     }
 
     *lastU = cbf_B.MovingAverage.MovingAverage;
@@ -700,12 +742,16 @@ void cbf_initialize(void)
     cbf_DW.TimeStampB = (rtInf);
 
     // InitializeConditions for Derivative: '<Root>/Derivative2'
-    cbf_DW.TimeStampA_m = (rtInf);
-    cbf_DW.TimeStampB_k = (rtInf);
+    cbf_DW.TimeStampA_b = (rtInf);
+    cbf_DW.TimeStampB_e = (rtInf);
+
+    // InitializeConditions for Derivative: '<Root>/Derivative3'
+    cbf_DW.TimeStampA_d = (rtInf);
+    cbf_DW.TimeStampB_b = (rtInf);
 
     // InitializeConditions for Derivative: '<Root>/Derivative'
     cbf_DW.TimeStampA_h = (rtInf);
-    cbf_DW.TimeStampB_e = (rtInf);
+    cbf_DW.TimeStampB_el = (rtInf);
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe6'
     // SystemInitialize for Enabled SubSystem: '<S14>/Enabled Subsystem'
@@ -913,7 +959,7 @@ void cbf_initialize(void)
     obj = cbf_DW.obj.pStatistic;
     if (obj->isInitialized == 1) {
       obj->pCumSum = 0.0;
-      for (i = 0; i < 10; i++) {
+      for (i = 0; i < 6; i++) {
         obj->pCumSumRev[i] = 0.0;
       }
 
