@@ -33,6 +33,7 @@ catkin_package(
   geometry_msgs
   roscpp
   std_msgs
+  INCLUDE_DIRS include
 )
 ###########
 ## Build ##
@@ -74,13 +75,13 @@ endif()
 target_compile_options(cbf PUBLIC 
   $<$<OR:$<COMPILE_LANGUAGE:CXX>,$<COMPILE_LANGUAGE:C>>:
   -DMODEL=cbf
-  -DNUMST=1
+  -DNUMST=2
   -DNCSTATES=0
   -DHAVESTDIO
   -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
   -DCLASSIC_INTERFACE=0
   -DALLOCATIONFCN=0
-  -DTID01EQ=0
+  -DTID01EQ=1
   -DTERMFCN=1
   -DONESTEPFCN=1
   -DMAT_FILE=0
@@ -118,7 +119,13 @@ add_custom_command(
                    TARGET cbf
                    POST_BUILD
                    COMMAND ${CMAKE_COMMAND}
+                   ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/codegen/exe/cbf/${file_i}
+				   )
+add_custom_command(
+                   TARGET cbf
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND}
                    ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/cbf_ert_rtw/${file_i}
 				   )
 endforeach(file_i)
-# Generated on Mon Jun 20 15:39:08 2022
+# Generated on Mon Feb 03 10:37:46 2025

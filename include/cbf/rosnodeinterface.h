@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'cbf'.
 //
-// Model version                  : 5.1
-// Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Mon Jun 20 15:39:06 2022
+// Model version                  : 8.5
+// Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+// C/C++ source code generated on : Mon Feb 03 10:37:45 2025
 //
 
 #ifndef _ROS_MATLAB_NODEINTERFACE_
@@ -87,7 +87,7 @@ namespace ros
       std::shared_ptr<ros::NodeHandle> mNode;
       Semaphore mBaseRateSem;
       std::shared_ptr<std::thread> mBaseRateThread;
-      std::shared_ptr<std::thread> mSchedulerThread;
+      std::shared_ptr<ros::WallTimer> mSchedulerTimer;
 
       //
       //
@@ -105,7 +105,7 @@ namespace ros
 
       //
       boolean_T getStopRequestedFlag(void);
-      void schedulerThread(void);
+      void schedulerCallback(const ros::WallTimerEvent& ev);
       void baseRateTask(void);
       std::shared_ptr<ros::NodeHandle> getNode()
       {
